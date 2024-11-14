@@ -129,7 +129,7 @@
         }'>
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img loading="lazy" class="w-100 h-auto mb-3" src="{{asset('assets/images/home/demo3/category_1.png')}}" width="124"
+                            <img loading="lazy" class="w-100 h-auto mb-3" src="{{asset('assets/images/home/demo3/process.png')}}" width="124"
                                 height="124" alt="" />
                             <div class="text-center">
                                 <a href="#" class="menu-link fw-medium">Women<br />Tops</a>
