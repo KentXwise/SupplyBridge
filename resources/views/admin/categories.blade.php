@@ -3,7 +3,7 @@
 <div class="main-content-inner">
     <div class="main-content-wrap">
         <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-            <h3>Brands</h3>
+            <h3>Categories</h3>
             <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                 <li>
                     <a href="{{route('admin.index')}}">
@@ -14,7 +14,7 @@
                     <i class="icon-chevron-right"></i>
                 </li>
                 <li>
-                    <div class="text-tiny">Brands</div>
+                    <div class="text-tiny">Categories</div>
                 </li>
             </ul>
         </div>
@@ -49,41 +49,41 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($brands as $brand)
-                            <tr>
-                                <td>{{ $brand->id }}</td>
-                                <td class="pname">
-                                    <div class="image">
-                                        <img src="{{ asset('uploads/brands/' . $brand->image) }}" alt="{{ $brand->name }}" class="image">
+                    @foreach ($categories as $category)
+                    <tr>
+                        <td>{{ $category->id }}</td>
+                        <td class="pname">
+                            <div class="image">
+                                <img src="{{ asset('uploads/brands/' . $category->image) }}" alt="{{ $category->name }}" class="image">
+                            </div>
+                            <div class="name">
+                                <a href="#" class="body-title-2">{{ $category->name }}</a>
+                            </div>
+                        </td>
+                        <td>{{ $category->slug }}</td>
+                        <td><a href="#" target="_blank">0</a></td>
+                        <td>
+                            <div class="list-icon-function">
+                                <a href="#">
+                                    <div class="item edit">
+                                        <i class="icon-edit-3"></i>
                                     </div>
-                                    <div class="name">
-                                        <a href="#" class="body-title-2">{{ $brand->name }}</a>
+                                </a>
+                                <form action="#" method="POST">
+                                    <div class="item text-danger delete">
+                                        <i class="icon-trash-2"></i>
                                     </div>
-                                </td>
-                                <td>{{ $brand->slug }}</td>
-                                <td><a href="#" target="_blank">0</a></td>
-                                <td>
-                                    <div class="list-icon-function">
-                                        <a href="#">
-                                            <div class="item edit">
-                                                <i class="icon-edit-3"></i>
-                                            </div>
-                                        </a>
-                                        <form action="#" method="POST">
-                                            <div class="item text-danger delete">
-                                                <i class="icon-trash-2"></i>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
                         </tbody>
                     </table>
                 </div>
                 <div class="divider"></div>
                 <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
-                    {{$brands->links('pagination::bootstrap-5')}}
+                    {{$categories->links('pagination::bootstrap-5')}}
                 </div>
             </div>
         </div>
@@ -107,8 +107,6 @@
                 form.submit();
             }
         });
-
-        
        });
     });
 </script>
