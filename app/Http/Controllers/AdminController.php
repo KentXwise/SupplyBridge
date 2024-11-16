@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Intervention\Image\Laravel\Facades\Image;
+use Illuminate\Support\Facades\Log;
 
 
 
@@ -51,7 +52,7 @@ class AdminController extends Controller
     public function GenerateBrandThumbnailsImage($image, $imageName){
        
         $destinationPath = public_path('uploads/brands');
-        $img = Image::read($image->path());
+        $img = Image::make($image->path());
         $img->cover(124,124,"top");
         $img->resize(124,124, function($constraint){
             $constraint->aspectRatio();
@@ -60,6 +61,51 @@ class AdminController extends Controller
     }
     public function categories(){
         $categories = Category::orderBy('id','DESC')->paginate(10);
-        return view ('admin.categories', compact('categories'));
+        return view('admin.categories', compact('categories'));
     }
-} 
+    public function category_add(){
+        return view('admin.category-add');
+    }
+    public function category_store(Request $request)
+    {
+        try {
+            $request->validate([
+                'name' => 'required',
+                'slug' => 'required|unique:categories,slug',
+                'image' => 'mimes:png,jpg,jpeg|max:2048',
+            ]);
+
+            $category = new Category();
+            $category->name = $request->name;
+            $category->slug = Str::slug($request->name);
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $file_extention = $image->extension();
+                $file_name = Carbon::now()->timestamp.'.'.$file_extention;
+                $this->GenerateCategoriesThumbnailsImage($image, $file_name);
+                $category->image = $file_name;
+            }
+
+            $category->save();
+            return redirect()->route('admin.categories')->with('success', 'Category added successfully');
+        } catch (\Exception $e) {
+            Log::error('Error adding category: '.$e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while adding the category.');
+        }
+    }
+
+    public function GenerateCategoriesThumbnailsImage($image, $imageName)
+    {
+        try {
+            $destinationPath = public_path('uploads/categories');
+            $img = Image::make($image->path());
+            $img->resize(124, 124, function($constraint){
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$imageName);
+        } catch (\Exception $e) {
+            Log::error('Error generating category thumbnail: '.$e->getMessage());
+            throw $e;
+        }
+    }
+}

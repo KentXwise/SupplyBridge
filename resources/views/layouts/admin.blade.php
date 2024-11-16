@@ -106,12 +106,12 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="{{route('admin.categories')}}" class="">
+                                            <a href="{{route('admin.category.add')}}" class="">
                                                 <div class="text">New Category</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="categories.html" class="">
+                                            <a href="{{route('admin.categories')}}" class="">
                                                 <div class="text">Categories</div>
                                             </a>
                                         </li>
