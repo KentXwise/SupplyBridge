@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File;
+
 
 
 
@@ -60,8 +62,13 @@ class AdminController extends Controller
       
     }
     public function categories(){
-        $categories = Category::orderBy('id','DESC')->paginate(10);
-        return view('admin.categories', compact('categories'));
+        try {
+            $categories = Category::orderBy('id', 'DESC')->paginate(10);
+            return view('admin.categories', compact('categories'));
+        } catch (\Exception $e) {
+            Log::error('Error fetching categories: '.$e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while fetching the categories.');
+        }
     }
     public function category_add(){
         return view('admin.category-add');
@@ -107,5 +114,36 @@ class AdminController extends Controller
             Log::error('Error generating category thumbnail: '.$e->getMessage());
             throw $e;
         }
+    }
+    public function category_edit($id)
+    {
+        
+            $category = Category::find($id);
+            return view('admin.category-edit', compact('category'));
+        
+    }
+    public function category_update(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'slug' => 'required|unique:categories,slug'.$request->id,
+            'image' => 'mimes:png,jpg,jpeg|max:2048',
+        ]);
+
+        $category = Category::find($request->id);
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
+        if ($request->hasFile('image')) {
+            if(File::exists(public_path('uploads/categories').'/'.$category->image)){
+                File::delete(public_path('uploads/categories').'/'.$category->image);
+            }
+            $image = $request->file('image');
+            $file_extention = $image->extension();
+            $file_name = Carbon::now()->timestamp.'.'.$file_extention;
+            $this->GenerateCategoriesThumbnailsImage($image, $file_name);
+            $category->image = $file_name;
+        }
+        $category->save();
+        return redirect()->route('admin.categories')->with('success', 'Category has been updated successfully'); 
+
     }
 }
