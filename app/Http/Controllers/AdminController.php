@@ -54,11 +54,17 @@ class AdminController extends Controller
         if (!File::exists($destinationPath)) {
             File::makeDirectory($destinationPath, 0755, true);
         }
-        $img = Image::make($image->path());
-        $img->cover(124,124,"top");
-        $img->resize(124,124, function($constraint){
-            $constraint->aspectRatio();
-        })->save($destinationPath.'/'.$imageName);
+
+        $img = imagecreatefromstring(file_get_contents($image->getRealPath()));
+        $width = imagesx($img);
+        $height = imagesy($img);
+        $new_width = 124;
+        $new_height = 124;
+        $tmp_img = imagecreatetruecolor($new_width, $new_height);
+        imagecopyresampled($tmp_img, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+        imagejpeg($tmp_img, $destinationPath.'/'.$imageName);
+        imagedestroy($img);
+        imagedestroy($tmp_img);
     }
     public function categories(){
         try {
@@ -103,19 +109,21 @@ class AdminController extends Controller
 
     public function GenerateCategoriesThumbnailsImage($image, $imageName)
     {
-        try {
-            $destinationPath = public_path('uploads/categories');
-            if (!File::exists($destinationPath)) {
-                File::makeDirectory($destinationPath, 0755, true);
-            }
-            $img = Image::make($image->path()); // Ensure this line is correct
-            $img->resize(124, 124, function($constraint){
-                $constraint->aspectRatio();
-            })->save($destinationPath.'/'.$imageName);
-        } catch (\Exception $e) {
-            Log::error('Error generating category thumbnail: '.$e->getMessage());
-            throw $e;
+        $destinationPath = public_path('uploads/categories');
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0755, true);
         }
+
+        $img = imagecreatefromstring(file_get_contents($image->getRealPath()));
+        $width = imagesx($img);
+        $height = imagesy($img);
+        $new_width = 124;
+        $new_height = 124;
+        $tmp_img = imagecreatetruecolor($new_width, $new_height);
+        imagecopyresampled($tmp_img, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+        imagejpeg($tmp_img, $destinationPath.'/'.$imageName);
+        imagedestroy($img);
+        imagedestroy($tmp_img);
     }
     public function category_edit($id)
     {
@@ -126,7 +134,6 @@ class AdminController extends Controller
     }
     public function category_update(Request $request){
         $request->validate([
-            'name' => 'required',
             'slug' => 'required|unique:categories,slug'.$request->id,
             'image' => 'mimes:png,jpg,jpeg|max:2048',
         ]);
