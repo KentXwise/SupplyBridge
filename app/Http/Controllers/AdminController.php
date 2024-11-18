@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Str;
 use App\Models\Brand;
 use App\Models\Category; 
@@ -9,10 +10,7 @@ use Carbon\Carbon;
 use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
-
-
-
-
+use App\Models\Product;
 
 class AdminController extends Controller
 {
@@ -52,14 +50,15 @@ class AdminController extends Controller
 
     }
     public function GenerateBrandThumbnailsImage($image, $imageName){
-       
         $destinationPath = public_path('uploads/brands');
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0755, true);
+        }
         $img = Image::make($image->path());
         $img->cover(124,124,"top");
         $img->resize(124,124, function($constraint){
             $constraint->aspectRatio();
         })->save($destinationPath.'/'.$imageName);
-      
     }
     public function categories(){
         try {
@@ -106,7 +105,10 @@ class AdminController extends Controller
     {
         try {
             $destinationPath = public_path('uploads/categories');
-            $img = Image::make($image->path());
+            if (!File::exists($destinationPath)) {
+                File::makeDirectory($destinationPath, 0755, true);
+            }
+            $img = Image::make($image->path()); // Ensure this line is correct
             $img->resize(124, 124, function($constraint){
                 $constraint->aspectRatio();
             })->save($destinationPath.'/'.$imageName);
@@ -143,7 +145,22 @@ class AdminController extends Controller
             $category->image = $file_name;
         }
         $category->save();
-        return redirect()->route('admin.categories')->with('success', 'Category has been updated successfully'); 
+        return redirect()->route('admin.categories')->with('status', 'Category has been updated successfully'); 
+
 
     }
+    public function category_delete($id){
+        $category = Category::find($id);
+        if(File::exists(public_path('uploads/categories').'/'.$category->image)){
+            File::delete(public_path('uploads/categories').'/'.$category->image);
+        }
+        $category->delete();
+        return redirect()->route('admin.categories')->with('status', 'Category has been deleted successfully');
+    }
+
+  public function products()
+  {
+      $products = Product::orderBy('id', 'DESC')->paginate(10);
+      return view('admin.products', compact('products'));
+  } 
 }
