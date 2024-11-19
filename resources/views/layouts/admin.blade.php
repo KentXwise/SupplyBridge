@@ -70,7 +70,7 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="{{route('admin.product.add')}}" class="">
+                                            <a href="" class="">
                                                 <div class="text">Add Product</div>
                                             </a>
                                         </li>
@@ -100,24 +100,23 @@
                                     </ul>
                                 </li>
                                 <li class="menu-item has-children">
-                                    <a href="javascript:void(0);" class="menu-item-button">
-                                        <div class="icon"><i class="icon-layers"></i></div>
-                                        <div class="text">Category</div>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li class="sub-menu-item">
-                                            <a href="{{route('admin.category.add')}}" class="">
-                                                <div class="text">New Category</div>
-                                            </a>
-                                        </li>
-                                        <li class="sub-menu-item">
-                                            <a href="{{route('admin.categories')}}" class="">
-                                                <div class="text">Categories</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
+       <a href="javascript:void(0);" class="menu-item-button">
+              <div class="icon"><i class="icon-layers"></i></div>
+              <div class="text">Category</div>
+       </a>
+       <ul class="sub-menu">
+              <li class="sub-menu-item">
+                     <a href="#" class="">
+                     <div class="text">New Category</div>
+                     </a>
+              </li>
+              <li class="sub-menu-item">
+                     <a href="{{route('admin.categories')}}" class="">
+                     <div class="text">Categories</div>
+                     </a>
+              </li>
+       </ul>
+</li>    
                                 <li class="menu-item has-children">
                                     <a href="javascript:void(0);" class="menu-item-button">
                                         <div class="icon"><i class="icon-file-plus"></i></div>
