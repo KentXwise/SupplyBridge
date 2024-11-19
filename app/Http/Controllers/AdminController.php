@@ -49,23 +49,73 @@ class AdminController extends Controller
         return redirect()->route('admin.brands')->with('success', 'Brand added successfully');
 
     }
-    public function GenerateBrandThumbnailsImage($image, $imageName){
+    public function GenerateBrandThumbnailsImage($image, $imageName)
+    {
         $destinationPath = public_path('uploads/brands');
         if (!File::exists($destinationPath)) {
             File::makeDirectory($destinationPath, 0755, true);
         }
-
-        $img = imagecreatefromstring(file_get_contents($image->getRealPath()));
-        $width = imagesx($img);
-        $height = imagesy($img);
-        $new_width = 124;
-        $new_height = 124;
-        $tmp_img = imagecreatetruecolor($new_width, $new_height);
-        imagecopyresampled($tmp_img, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-        imagejpeg($tmp_img, $destinationPath.'/'.$imageName);
-        imagedestroy($img);
-        imagedestroy($tmp_img);
+        $img = Image::make($image->path());
+        $img->cover(124,124,"top");
+        $img->resize(124,124, function($constraint){
+            $constraint->aspectRatio();
+        })->save($destinationPath.'/'.$imageName);
     }
+    public function brand_edit($id)
+    {
+        $brand = Brand::find($id);
+        return view('admin.brand-edit',compact('brand'));
+    }
+    
+    public function brand_update(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'slug' => 'required|unique:brands,slug',
+            'image' => 'mimes:png,jpg,jpeg|max:2048',
+        ]);
+
+        $brand = Brand::find($request->id);
+        $brand = new Brand();
+        $brand->name = $request->name;
+        $brand->slug = Str::slug($request->name);
+        if($request->hasfile('image')){
+            if(File::exists(public_path('uploads/brands').'/'.$brand->image))
+             {
+                File::delete(public_path('uploads/brands').'/'.$brand->image);
+             }
+        $image = $request->file('image');
+        $file_extention = $request->file('image')->extension();
+        $file_name = Carbon::now()->timestamp.'.'.$file_extention;
+        $this->GenerateBrandThumbnailsImage($image, $file_name);
+        $brand->image = $file_name;
+        }
+        
+        $brand->save();
+        return redirect()->route('admin.brands')->with('success', 'Brand updated successfully');
+    }
+
+    public function delete_brand($id)
+    {
+        $brand = Brand::find($id);
+    
+        // Check if the brand exists
+        if (!$brand) {
+            return redirect()->route('admin.brands')->with('error', 'Brand not found.');
+        }
+    
+        // If the brand exists, proceed with file deletion
+        if (File::exists(public_path('uploads/brands') . '/' . $brand->image)) {
+            File::delete(public_path('uploads/brands') . '/' . $brand->image);
+        }
+    
+        // Delete the brand record
+        $brand->delete();
+    
+        return redirect()->route('admin.brands')->with('status', 'Record has been deleted successfully!');
+    }
+    
+
     public function categories(){
         try {
             $categories = Category::orderBy('id', 'DESC')->paginate(10);
@@ -109,21 +159,19 @@ class AdminController extends Controller
 
     public function GenerateCategoriesThumbnailsImage($image, $imageName)
     {
-        $destinationPath = public_path('uploads/categories');
-        if (!File::exists($destinationPath)) {
-            File::makeDirectory($destinationPath, 0755, true);
+        try {
+            $destinationPath = public_path('uploads/categories');
+            if (!File::exists($destinationPath)) {
+                File::makeDirectory($destinationPath, 0755, true);
+            }
+            $img = Image::make($image->path()); // Ensure this line is correct
+            $img->resize(124, 124, function($constraint){
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$imageName);
+        } catch (\Exception $e) {
+            Log::error('Error generating category thumbnail: '.$e->getMessage());
+            throw $e;
         }
-
-        $img = imagecreatefromstring(file_get_contents($image->getRealPath()));
-        $width = imagesx($img);
-        $height = imagesy($img);
-        $new_width = 124;
-        $new_height = 124;
-        $tmp_img = imagecreatetruecolor($new_width, $new_height);
-        imagecopyresampled($tmp_img, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-        imagejpeg($tmp_img, $destinationPath.'/'.$imageName);
-        imagedestroy($img);
-        imagedestroy($tmp_img);
     }
     public function category_edit($id)
     {
@@ -134,6 +182,7 @@ class AdminController extends Controller
     }
     public function category_update(Request $request){
         $request->validate([
+            'name' => 'required',
             'slug' => 'required|unique:categories,slug'.$request->id,
             'image' => 'mimes:png,jpg,jpeg|max:2048',
         ]);
@@ -170,83 +219,4 @@ class AdminController extends Controller
       $products = Product::orderBy('id', 'DESC')->paginate(10);
       return view('admin.products', compact('products'));
   } 
-  public function product_add(){
-    $categories=Category::select('id','name')->orderBy('name')->get();
-    $brands=Brand::select('id','name')->orderBy('name')->get();
-    return view('admin.product-add',compact('categories','brands'));
-  }
-  public function product_store(Request $request){
-    $request->validate([
-        'name' => 'required',
-        'slug' => 'required|unique:products,slug',
-        'short_description' => 'required',
-        'description' => 'required',
-        'regular_price' => 'required',
-        'sale_price' => 'required',
-        'SKU' => 'required',
-        'stock_status' => 'required',
-        'featured' => 'required',
-        'quantity' => 'required',
-        'image' => 'mimes:png,jpg,jpeg|max:2048',
-        'category_id' => 'required',
-        'brand_id' => 'required'
-    ]);
-    $product=new Product();
-    $product->name=$request->name;
-    $product->slug=Str::slug($request->name);
-    $product->short_description=$request->short_description;
-    $product->description=$request->description;
-    $product->regular_price=$request->regular_price;
-    $product->sale_price=$request->sale_price;
-    $product->SKU=$request->SKU;
-    $product->stock_status=$request->stock_status;
-    $product->featured=$request->featured;
-    $product->quantity=$request->quantity;;
-    $product->category_id=$request->category_id;
-    $product->brand_id=$request->brand_id;
-
-    $current_timestamp=Carbon::now()->timestamp;
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imageName = $current_timestamp.'.'.$image->extension();
-        $this->GenerateProductThumbnailImage($image, $imageName);
-        $product->image = $imageName;
-    }
-    $gallery = array();
-    $gallery_images="";
-    $counter = 1;
-    if ($request->hasFile('images')) { 
-        $allowedfileExtion=['jpg','png','jpeg'];
-        $files=$request->file('images');
-        foreach($files as $file){
-            $gextension=$file->getClientOriginalExtension();
-            $gcheck=in_array($gextension,$allowedfileExtion);
-            if($gcheck){
-            $gfileName=$current_timestamp.'_'.$counter.'.'.$gextension;
-            $this->GenerateProductThumbnailImage($file, $gfileName);
-            array_push($gallery_arr,$gfileName);
-            $counter= $counter+1;
-            }
-        }
-        $gallery_images=implode(',',$gallery_arr);
-        }
-        $product->images=$gallery_images;
-        $product->save();
-        return redirect()->route('admin.products')->with('success', 'Product has been added successfully');
-    }
-  
-  public function GenerateProductThumbnailImage($image, $imageName){
-    $destinationPathThumbnail = public_path('uploads/products/thumbnails');
-    $destinationPath = public_path('uploads/products');
-    $img = Image::make($image->path());
-
-    $img->cover(540, 689,'top');
-    $img->resize(540, 689, function ($constraint) {
-        $constraint->aspectRatio();
-    })->save($destinationPath.'/'.$imageName);
-
-    $img->resize(540, 689, function ($constraint) {
-        $constraint->aspectRatio();
-    })->save($destinationPathThumbnail.'/'.$imageName);
-  }
 }
