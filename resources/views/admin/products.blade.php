@@ -6,7 +6,7 @@
                                     <h3>All Products</h3>
                                     <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                                         <li>
-                                            <a href="{{route('admin.index')}}">
+                                            <a href="{{route('admin.products')}}">
                                                 <div class="text-tiny">Dashboard</div>
                                             </a>
                                         </li>
@@ -85,12 +85,12 @@
                                                                     <i class="icon-eye"></i>
                                                                 </div>
                                                             </a>
-                                                            <a href="#">
+                                                            <a href="{{route('admin.product.edit',['id'=>$product->id])}}">
                                                                 <div class="item edit">
                                                                     <i class="icon-edit-3"></i>
                                                                 </div>
                                                             </a>
-                                                            <form action="#" method="POST">
+                                                            <form action="{{route('admin.product.delete',['id'=>$product->id])}}" method="POST">
                                                                 <div class="item text-danger delete">
                                                                     <i class="icon-trash-2"></i>
                                                                 </div>
@@ -112,3 +112,25 @@
                             </div>
                         </div>
 @endsection
+
+@push('scripts')
+<script>
+        $(function(){
+            $('.delelte').on('click', function(e){
+                e.preventDefault();
+                var form = $(this).closest('form');
+                swal({
+                    title: "Are you sure",
+                    text: "You want to delete this record?",
+                    type:"warning",
+                    buttons:["No","Yes"],
+                    confirmButtonColor: '#dc3545'
+                }).then(function(result){
+                    if(result){
+                        form.submit();
+                    }
+                }); 
+            });
+        });
+</script>
+@endpush
