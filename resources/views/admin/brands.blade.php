@@ -54,7 +54,7 @@
                                 <td>{{ $brand->id }}</td>
                                 <td class="pname">
                                     <div class="image">
-                                        <img src="{{ asset('uploads/brands/' . $brand->image) }}" alt="{{ $brand->name }}" class="image">
+                                        <img src="{{asset('uploads/brands/' . $brand->image) }}" alt="{{ $brand->name }}" class="image">
                                     </div>
                                     <div class="name">
                                         <a href="#" class="body-title-2">{{ $brand->name }}</a>
@@ -64,16 +64,18 @@
                                 <td><a href="#" target="_blank">0</a></td>
                                 <td>
                                     <div class="list-icon-function">
-                                        <a href="#">
+                                        <a href="{{route('admin.brand.edit',['id'=>$brand->id])}}">
                                             <div class="item edit">
                                                 <i class="icon-edit-3"></i>
                                             </div>
                                         </a>
-                                        <form action="#" method="POST">
-                                            <div class="item text-danger delete">
-                                                <i class="icon-trash-2"></i>
-                                            </div>
-                                        </form>
+                                 <form action="{{route('admin.brand.delete',['id'=>$brand->id])}}" method="POST">
+                                         @csrf
+                                         @method('DELETE')
+                                             <div class="item text-danger delete">
+                                            <i class="icon-trash-2"></i>
+                                     </div>
+                                </form>
                                     </div>
                                 </td>
                             </tr>
@@ -90,3 +92,24 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+    <script>
+        $(function(){
+            $(".delete").on('click',function(e){
+                e.preventDefault();
+                var selectedForm = $(this).closest('form');
+                swal({
+                    title: "Are you sure?",
+                    text: "You want to delete this record?",
+                    type: "warning",
+                    buttons: ["No!", "Yes!"],
+                    confirmButtonColor: '#dc3545'
+                }).then(function (result) {
+                    if (result) {
+                        selectedForm.submit();  
+                    }
+                });                             
+            });
+        });
+    </script>
+@endpush

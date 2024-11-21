@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/animation.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-select.min.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}"> <!-- corrected link -->
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}">
 <link rel="stylesheet" href="{{ asset('font/fonts.css')}}">
 <link rel="stylesheet" href="{{ asset('icon/style.css')}}">
 <link rel="shortcut icon" href="{{ asset('images/favicon.ico')}}">
@@ -42,7 +42,7 @@
                 <div class="section-menu-left">
                     <div class="box-logo">
                         <a href="{{route('admin.index')}}" id="site-logo-inner">
-                            <img class="" id="logo_header" alt="" src="{{ asset('images/logo/logo.png') }}"
+                            <img class="" id="logo_header_1" alt="" src="{{ asset('images/logo/logo.png') }}"
                                 data-light="{{ asset('images/logo/logo.png') }}" data-dark="{{ asset('images/logo/logo.png') }}">
                         </a>
                         <div class="button-show-hide">
@@ -70,12 +70,12 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="add-product.html" class="">
+                                            <a href="{{route('admin.product.add')}}" class="">
                                                 <div class="text">Add Product</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="products.html" class="">
+                                            <a href="{{route('admin.products')}}" class="">
                                                 <div class="text">Products</div>
                                             </a>
                                         </li>
@@ -88,7 +88,7 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="add-brand.html" class="">
+                                            <a href="{{route('admin.brand.add')}}" class="">
                                                 <div class="text">New Brand</div>
                                             </a>
                                         </li>
@@ -100,24 +100,23 @@
                                     </ul>
                                 </li>
                                 <li class="menu-item has-children">
-                                    <a href="javascript:void(0);" class="menu-item-button">
-                                        <div class="icon"><i class="icon-layers"></i></div>
-                                        <div class="text">Category</div>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li class="sub-menu-item">
-                                            <a href="add-category.html" class="">
-                                                <div class="text">New Category</div>
-                                            </a>
-                                        </li>
-                                        <li class="sub-menu-item">
-                                            <a href="categories.html" class="">
-                                                <div class="text">Categories</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
+       <a href="javascript:void(0);" class="menu-item-button">
+              <div class="icon"><i class="icon-layers"></i></div>
+              <div class="text">Category</div>
+       </a>
+       <ul class="sub-menu">
+              <li class="sub-menu-item">
+                     <a href="#" class="">
+                     <div class="text">New Category</div>
+                     </a>
+              </li>
+              <li class="sub-menu-item">
+                     <a href="{{route('admin.categories')}}" class="">
+                     <div class="text">Categories</div>
+                     </a>
+              </li>
+       </ul>
+</li>    
                                 <li class="menu-item has-children">
                                     <a href="javascript:void(0);" class="menu-item-button">
                                         <div class="icon"><i class="icon-file-plus"></i></div>
