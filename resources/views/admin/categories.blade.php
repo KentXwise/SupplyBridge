@@ -62,7 +62,7 @@
                             <td>{{$category->id}}</td>    
                             <td class="pname">
                                 <div class="image">
-                                    <img src="{{asset('uploads/categories')}}/{{$category->image}}" alt="" class="image">
+                                    <img src="{{asset('uploads/categories/' . $category->image)}}" alt="" class="image">
                                 </div>
                                 <div class="name">
                                     <a href="#" class="body-title-2">{{$category->name}}</a>                                       
@@ -71,14 +71,20 @@
                             <td>{{$category->slug}}</td>      
                             <td><a href="{{route('admin.category.products',['category_slug'=>$category->slug])}}" target="_blank">{{$category->products()->count()}}</a></td>                               
                             <td>
-                                <div class="list-icon-function">                                    
+                                <div class="list-icon-function">    
+                                <a href="{{route('admin.category.edit',['id'=>$brand->id])}}">                                
                                     <div class="item edit">
                                           <i class="icon-edit-3"></i>
                                    </div>
+                                </a>
 
-                                    <div class="item text-danger delete">
-                                          <i class="icon-trash-2"></i>
-                                   </div>
+                                <form action="{{route('admin.category.delete',['id'=>$brand->id])}}" method="POST">
+                                         @csrf
+                                         @method('DELETE')
+                                             <div class="item text-danger delete">
+                                            <i class="icon-trash-2"></i>
+                                     </div>
+                                </form>
                                 </div>
                             </td>
                         </tr>
