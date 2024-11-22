@@ -388,7 +388,7 @@
             }
           }'>
           <div class="swiper-wrapper">
-            @foreach($products as $rproduct)
+            @foreach ($products as $rproduct)
             <div class="swiper-slide product-card">
               <div class="pc__img-wrapper">
                 <a href="{{route('shop.product.details',['product_slug'=>$rproduct->slug])}} ">

@@ -65,20 +65,20 @@
                                     <img src="{{asset('uploads/categories/' . $category->image)}}" alt="" class="image">
                                 </div>
                                 <div class="name">
-                                    <a href="#" class="body-title-2">{{$category->name}}</a>                                       
+                                    <a href="#" class="body-title-2">{{ $category->name }}</a>                                       
                                 </div>  
                             </td>
-                            <td>{{$category->slug}}</td>      
-                            <td><a href="{{route('admin.category.products',['category_slug'=>$category->slug])}}" target="_blank">{{$category->products()->count()}}</a></td>                               
+                            <td>{{ $category->slug }}</td>      
+                            <td><a href="#" target="_blank">0</a></td>                               
                             <td>
                                 <div class="list-icon-function">    
-                                <a href="{{route('admin.category.edit',['id'=>$brand->id])}}">                                
+                                <a href="{{route('admin.category.edit',['id'=>$category->id])}}">                                
                                     <div class="item edit">
                                           <i class="icon-edit-3"></i>
                                    </div>
                                 </a>
 
-                                <form action="{{route('admin.category.delete',['id'=>$brand->id])}}" method="POST">
+                                <form action="{{route('admin.category.delete',['id'=>$category->id])}}" method="POST">
                                          @csrf
                                          @method('DELETE')
                                              <div class="item text-danger delete">
@@ -95,8 +95,29 @@
             <div class="divider"></div>
             <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">                
                 {{$categories->links('pagination::bootstrap-5')}}
-            </div>
+            </div>  
         </div>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function(){
+            $(".delete").on('click',function(e){
+                e.preventDefault();
+                var selectedForm = $(this).closest('form');
+                swal({
+                    title: "Are you sure?",
+                    text: "You want to delete this record?",
+                    type: "warning",
+                    buttons: ["No!", "Yes!"],
+                    confirmButtonColor: '#dc3545'
+                }).then(function (result) {
+                    if (result) {
+                        selectedForm.submit();  
+                    }
+                });                             
+            });
+        });
+    </script>
