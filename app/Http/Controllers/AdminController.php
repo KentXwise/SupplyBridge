@@ -58,7 +58,9 @@ class AdminController extends Controller
         }
         $img = Image::read($image->path());
         $img->cover(124, 124, "top");
-        $img->resize(124, 124);
+        $img->resize(124, 124,function($constraint){
+            $constraint->aspectRatio();
+        });
         $img->save($destinationPath.'/'.$imageName);
     }
     public function brand_edit($id)
@@ -137,10 +139,6 @@ class AdminController extends Controller
     public function GenerateCategoryThumbnailsImage($image, $imageName)
     {
         $destinationPath = public_path('uploads/categories');
-        
-        if (!File::exists($destinationPath)) {
-            File::makeDirectory($destinationPath, 0755, true);
-        }
         $img = Image::read($image->path());
         $img->cover(124, 124, "top");
         $img->resize(124, 124);
@@ -155,23 +153,35 @@ class AdminController extends Controller
         
     }
     public function category_update(Request $request){
-        $request->validate([
-            'name' => 'required',
-            'slug' => 'required|unique:categories,slug'.$request->id,
-            'image' => 'mimes:png,jpg,jpeg|max:2048',
-        ]);
-
-        $category = new Category();
-        $category->name = $request->name;
-        $category->slug = Str::slug($request->name);
-        $image = $request->file('image');
-        $file_extention = $image->extension();
-        $file_name = Carbon::now()->timestamp.'.'.$file_extention;
-        $this->GenerateCategoryThumbnailsImage($image, $file_name);
-        $category->image = $file_name;
-        $category->save();
-
-
+        
+            $request->validate([
+                'name' => 'required',
+                'slug' => 'required|unique:categories,slug,'.$request->id,
+                'image' => 'mimes:png,jpg,jpeg|max:2048',
+            ]);
+        
+            $category = Category::find($request->id);
+            if (!$category) {
+                return redirect()->back()->with('error', 'Category not found.');
+            }
+        
+            $category->name = $request->name;
+            $category->slug = Str::slug($request->name);
+        
+            if ($request->hasFile('image')) {
+                if (File::exists(public_path('uploads/categories').'/'.$category->image)) {
+                    File::delete(public_path('uploads/categories').'/'.$category->image);
+                }
+        
+                $image = $request->file('image');
+                $file_name = Carbon::now()->timestamp.'.'.$image->extension();
+                $this->GenerateCategoryThumbnailsImage($image, $file_name);
+                $category->image = $file_name;
+            }
+        
+            $category->save();
+            return redirect()->route('admin.categories')->with('success', 'Category updated successfully');
+        
     }
     public function category_delete($id){
         $category = Category::find($id);
