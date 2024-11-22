@@ -53,11 +53,10 @@
                                                 <div class="body-title mb-10">Category <span class="tf-color-1">*</span>
                                                 </div>
                                                 <div class="select">
-                                                    <select class="" name="category_id">
-                                                        <option>Choose category</option>
+                                                    <select class="" name="category_id" required>
+                                                        <option value="">Choose category</option>
                                                         @foreach ( $categories as $category )
-                                                        
-                                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                                        <option value="{{$category->id}}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -67,11 +66,10 @@
                                                 <div class="body-title mb-10">Brand <span class="tf-color-1">*</span>
                                                 </div>
                                                 <div class="select">
-                                                    <select class="" name="brand_id">
-                                                        <option>Choose Brand</option>
+                                                    <select class="" name="brand_id" required>
+                                                        <option value="">Choose Brand</option>
                                                         @foreach ($brands as $brand )
-                               
-                                                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                                        <option value="{{$brand->id}}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}>{{$brand->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -146,17 +144,21 @@
                                             <fieldset class="name">
                                                 <div class="body-title mb-10">Regular Price <span
                                                         class="tf-color-1">*</span></div>
-                                                <input class="mb-10" type="text" placeholder="Enter regular price"
-                                                    name="regular_price" tabindex="0" value="{{old('regular_price')}}" aria-required="true"
-                                                    required="">
+                                                <input class="mb-10" type="number" step="0.01" min="0" max="999999.99" 
+                                                    placeholder="Enter regular price" name="regular_price" 
+                                                    tabindex="0" value="{{old('regular_price')}}" 
+                                                    aria-required="true" required="">
+                                                <div class="text-tiny">Enter a value between 0 and 999,999.99</div>
                                             </fieldset>
                                             @error('regular_price') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
                                             <fieldset class="name">
                                                 <div class="body-title mb-10">Sale Price <span
                                                         class="tf-color-1">*</span></div>
-                                                <input class="mb-10" type="text" placeholder="Enter sale price"
-                                                    name="sale_price" tabindex="0" value="{{old('sale_price')}}" aria-required="true"
-                                                    required="">
+                                                <input class="mb-10" type="number" step="0.01" min="0" max="999999.99"
+                                                    placeholder="Enter sale price" name="sale_price"
+                                                    tabindex="0" value="{{old('sale_price')}}"
+                                                    aria-required="true" required="">
+                                                <div class="text-tiny">Enter a value between 0 and 999,999.99</div>
                                             </fieldset>
                                             @error('sale_price') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
                                         </div>
@@ -166,16 +168,20 @@
                                             <fieldset class="name">
                                                 <div class="body-title mb-10">SKU <span class="tf-color-1">*</span>
                                                 </div>
-                                                <input class="mb-10" type="text" placeholder="Enter SKU" name="SKU"
-                                                    tabindex="0" value="{{old('SKU')}}" aria-required="true" required="">
+                                                <input class="mb-10" type="text" maxlength="50"
+                                                    placeholder="Enter SKU" name="SKU"
+                                                    tabindex="0" value="{{old('SKU')}}"
+                                                    aria-required="true" required="">
                                             </fieldset>
                                             @error('SKU') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
                                             <fieldset class="name">
                                                 <div class="body-title mb-10">Quantity <span class="tf-color-1">*</span>
                                                 </div>
-                                                <input class="mb-10" type="text" placeholder="Enter quantity"
-                                                    name="quantity" tabindex="0" value="{{old('quantity')}}" aria-required="true"
-                                                    required="">
+                                                <input class="mb-10" type="number" min="0" max="999999"
+                                                    placeholder="Enter quantity" name="quantity"
+                                                    tabindex="0" value="{{old('quantity')}}"
+                                                    aria-required="true" required="">
+                                                <div class="text-tiny">Enter a value between 0 and 999,999</div>
                                             </fieldset>
                                             @error('quantity') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
                                         </div>
@@ -208,7 +214,7 @@
                                 <!-- /form-add-product -->
                             </div>
                             <!-- /main-content-wrap -->
-                        </div
+</div>
 @endsection
 
 @push('scripts')
