@@ -13,7 +13,8 @@
         "laravel/framework": "^11.16.0",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5",
-        "nesbot/carbon": "^3.8"
+        "nesbot/carbon": "^3.8",
+        "surfsidemedia/shoppingcart": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

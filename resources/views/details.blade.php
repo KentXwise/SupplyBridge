@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('content')
 
 <main class="pt-90">
@@ -14,14 +14,15 @@
                      <div class="swiper-slide product-single__image-item">
                     <img loading="lazy" class="h-auto" src="{{asset('uploads/products')}}/{{$product->image}}" width="674"
                       height="674" alt="" />
-                    <a data-fancybox="gallery" href="{{asset('uploads/products')}}/{{$product->image}" data-bs-toggle="tooltip"
+                    <a data-fancybox="gallery" href="{{asset('uploads/products')}}/{{$product->image}}" data-bs-toggle="tooltip"
                       data-bs-placement="left" title="Zoom">
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <use href="#icon_zoom" />
                       </svg>
                     </a>
                   </div>
-                 @foreach (explode(',',$product->image)as $gimg)
+
+                 @foreach (explode(',',$product->images) as $gimg)
                   <div class="swiper-slide product-single__image-item">
                     <img loading="lazy" class="h-auto" src="{{asset('uploads/products')}}/{{$gimg}}" width="674"
                       height="674" alt="" />
@@ -47,9 +48,9 @@
             <div class="product-single__thumbnail">
               <div class="swiper-container">
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide product-single__image-item"><img loading="lazy" class="h-auto" src="{{asset('uploads/thumbnails')}}/{{$product->image}}" width="104" height="104" alt="" /></div>
-                  @foreach (explode(',',$product->image)as $gimg)
-                  <div class="swiper-slide product-single__image-item"><img loading="lazy" class="h-auto" src="{{asset('uploads/thumbnails')}}/{{$gimg}}" width="104" height="104" alt="" /></div>
+                  <div class="swiper-slide product-single__image-item"><img loading="lazy" class="h-auto" src="{{asset('uploads/products/thumbnails')}}/{{$product->image}}" width="104" height="104" alt="" /></div>
+                  @foreach (explode(',',$product->images) as $gimg)
+                  <div class="swiper-slide product-single__image-item"><img loading="lazy" class="h-auto" src="{{asset('uploads/products/thumbnails')}}/{{$gimg}}" width="104" height="104" alt="" /></div>
                  @endforeach
                 </div>
               </div>
@@ -160,11 +161,11 @@
           <div class="product-single__meta-info">
             <div class="meta-item">
               <label>SKU:</label>
-              <span>{{$product->SKU}}A</span>
+              <span>{{$product->SKU}}</span>
             </div>
             <div class="meta-item">
               <label>Categories:</label>
-              <span>$product->category->name</span>
+              <span>{{$product->category->name ?? 'No Category' }}</span>
             </div>
             <div class="meta-item">
               <label>Tags:</label>
@@ -388,15 +389,15 @@
             }
           }'>
           <div class="swiper-wrapper">
-            @foreach ($products as $rproduct)
+            @foreach ($rproducts as $rproduct)
             <div class="swiper-slide product-card">
               <div class="pc__img-wrapper">
                 <a href="{{route('shop.product.details',['product_slug'=>$rproduct->slug])}} ">
                   <img loading="lazy" src="{{asset('uploads/products')}}/{{$rproduct->image}}" width="330" height="400"
                     alt="{{$product->name}}" class="pc__img">
-                    @foreach (explode(",",$rproduct->image) as $gimg)
-                  <img loading="lazy" src="{{asset('uploads/products')}}/{{$rproduct->gimg}" width="330" height="400"
-                    alt="{{$product->name}}" class="pc__img pc__img-second">
+                    @foreach (explode(',', $rproduct->images) as $gimg)
+    <img loading="lazy" src="{{ asset('uploads/products/' . $gimg) }}" width="330" height="400" 
+         alt="{{ $rproduct->name }}" class="pc__img pc__img-second">
                     @endforeach
                 </a>
                 <button
@@ -405,7 +406,7 @@
               </div>
 
               <div class="pc__info position-relative">
-                <p class="pc__category">{{$rproduct->category->name}}</p>
+                <p class="pc__category">{{$product->category->name ?? 'No Category' }}</p>
                 <h6 class="pc__title"><a href="{{route('shop.product.details',['product_slug'=>$rproduct->slug])}}">{{$rproduct->name}}</a></h6>
                 <div class="product-card__price d-flex">
                   <span class="money price">
