@@ -6,6 +6,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
 use App\Http\Controllers\AdminController;
+<<<<<<< HEAD
+=======
+use App\Http\Controllers\CartController;
+>>>>>>> ChrisInsanity
 use App\Http\Controllers\ShopController;
 
 Auth::routes();
@@ -13,6 +17,10 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/shop',[ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop/{product_slug}',[ShopController::class,'product_details'])->name('shop.product.details');
+<<<<<<< HEAD
+=======
+Route::get('/cart',[CartController::class, 'index'])->name('cart.index');
+>>>>>>> ChrisInsanity
 
 Route::middleware(['auth'])->group(function () {
 Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
@@ -38,4 +46,5 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/admin/product/{id}/edit', [AdminController::class, 'product_edit'])->name('admin.product.edit');
     Route::put('/admin/product/update',[AdminController::class, 'product_update'])->name('admin.product.update');
     Route::delete('/admin/product/{id}/delete', [AdminController::class, 'product_detele'])->name('admin.product.delete');
+
 });

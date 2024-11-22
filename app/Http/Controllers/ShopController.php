@@ -14,14 +14,10 @@ class ShopController extends Controller
         return view('shop', compact('products'));
     }
 
-    public function product_details($product_slug)
-    {
-        // Fetch the product details
-        $product = Product::where('slug', $product_slug)->first();
-        
-        // Fetch related products
-        $related_products = Product::where('slug', '<>', $product_slug)->take(8)->get();
-
-        return view('details', compact('product', 'related_products'));
-    }
+   public function product_details($product_slug)
+   {
+    $product = Product::where('slug',$product_slug)->first();
+    $rproducts = Product::where('slug','<>', $product_slug)->get()->take(8);  
+    return view('details', compact('product','rproducts'));
+   }
 }
