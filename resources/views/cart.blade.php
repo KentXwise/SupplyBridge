@@ -65,13 +65,13 @@
                 </td>
                 <td>
                   <div class="qty-control position-relative">
-                    <input type="number" name="quantity" value="3" min="1" class="qty-control__number text-center">
+                    <input type="number" name="quantity" value="{{$item->qty}}" min="1" class="qty-control__number text-center">
                     <div class="qty-control__reduce">-</div>
                     <div class="qty-control__increase">+</div>
                   </div>
                 </td>
                 <td>
-                  <span class="shopping-cart__subtotal">${{$item->subTotal}}</span>
+                  <span class="shopping-cart__subtotal">${{$item->subtotal}}</span>
                 </td>
                 <td>
                   <a href="#" class="remove-cart">
@@ -103,7 +103,7 @@
                 <tbody>
                   <tr>
                     <th>Subtotal</th>
-                    <td>${{Cart::instance('cart')->Subtotal()}}</td>
+                    <td>${{Cart::instance('cart')->subtotal()}}</td>
                   </tr>
                   <tr>
                     <th>Shipping</th>
@@ -111,11 +111,11 @@
                   </tr>
                   <tr>
                     <th>VAT</th>
-                    <td>${{Cart::instace('cart')->tax()}}</td>
+                    <td>${{Cart::instance('cart')->tax()}}</td>
                   </tr>
                   <tr>
                     <th>Total</th>
-                    <td>${{Cart::instace('cart')->total()}}</td>
+                    <td>${{Cart::instance('cart')->total()}}</td>
                   </tr>
                 </tbody>
               </table>
