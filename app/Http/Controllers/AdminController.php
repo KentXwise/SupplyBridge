@@ -149,7 +149,7 @@ class AdminController extends Controller
             if (!File::exists($destinationPath)) {
                 File::makeDirectory($destinationPath, 0755, true);
             }
-            $img = Image::make($image->path()); // Ensure this line is correct
+            $img = Image::read($image->path()); // Ensure this line is correct
             $img->resize(124, 124, function($constraint){
                 $constraint->aspectRatio();
             })->save($destinationPath.'/'.$imageName);

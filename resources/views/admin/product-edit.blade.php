@@ -86,9 +86,9 @@
                                                     class="tf-color-1">*</span></div>
                                             <textarea class="mb-10 ht-150" name="short_description"
                                                 placeholder="Short Description" tabindex="0" aria-required="true"
-                                                required="">{{$product->short_description'}}</textarea>
-                                            <div class="text-tiny">Do not exceed 100 characters when entering the
-                                                product name.</div>
+                                                required="">{{$product->short_description}}</textarea>
+                                            <div class="text-tiny">"Do not exceed 100 characters when entering the
+                                                product name."</div>
                                         </fieldset>
                                         @error('short_description') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
 
