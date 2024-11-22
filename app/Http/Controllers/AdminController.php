@@ -40,6 +40,7 @@ class AdminController extends Controller
         $brand = new Brand();
         $brand->name = $request->name;
         $brand->slug = Str::slug($request->name);
+
         $image = $request->file('image');
         $file_extention = $request->file('image')->extension();
         $file_name = Carbon::now()->timestamp.'.'.$file_extention;
@@ -110,46 +111,40 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'An error occurred while fetching the categories.');
         }
     }
-    public function category_add(){
+   
+    public function category_add()
+    {
         return view('admin.category-add');
     }
     public function category_store(Request $request)
     {
-        try {
-            $request->validate([
-                'name' => 'required',
-                'slug' => 'required|unique:categories,slug',
-                'image' => 'mimes:png,jpg,jpeg|max:2048',
-            ]);
+        $request->validate([
+            'name' => 'required',
+            'slug' => 'required|unique:categories,slug',
+            'image' => 'mimes:png,jpg,jpeg|max:2048',
+        ]);
+        
+        $category = new Category();
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
 
-            $category = new Category();
-            $category->name = $request->name;
-            $category->slug = Str::slug($request->name);
-
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $file_extention = $image->extension();
-                $file_name = Carbon::now()->timestamp.'.'.$file_extention;
-                $this->GenerateCategoriesThumbnailsImage($image, $file_name);
-                $category->image = $file_name;
-            }
-
-            $category->save();
-            return redirect()->route('admin.categories')->with('success', 'Category added successfully');
-        } catch (\Exception $e) {
-            Log::error('Error adding category: '.$e->getMessage());
-            return redirect()->back()->with('error', 'An error occurred while adding the category.');
-        }
+        $image = $request->file('image');
+        $file_extention = $request->file('image')->extension();
+        $file_name = Carbon::now()->timestamp.'.'.$file_extention;
+        $this->GenerateCategoryThumbnailsImage($image, $file_name);
+        $category->image = $file_name;
+        $category->save();
+        return redirect()->route('admin.categories')->with('success', 'category added successfully');
     }
-
-    public function GenerateCategoriesThumbnailsImage($image, $imageName)
+    
+    public function GenerateCategoryThumbnailsImage ($image, $imageName)
     {
         try {
             $destinationPath = public_path('uploads/categories');
             if (!File::exists($destinationPath)) {
                 File::makeDirectory($destinationPath, 0755, true);
             }
-            $img = Image::read($image->path()); // Ensure this line is correct
+            $img = Image::make($image->path()); // Ensure this line is correct
             $img->resize(124, 124, function($constraint){
                 $constraint->aspectRatio();
             })->save($destinationPath.'/'.$imageName);
@@ -158,6 +153,7 @@ class AdminController extends Controller
             throw $e;
         }
     }
+
     public function category_edit($id)
     {
         
@@ -253,6 +249,7 @@ class AdminController extends Controller
     $gallery_arr = array();
     $gallery_images="";
     $counter = 1;
+
     if ($request->hasFile('images')) { 
         $allowedfileExtion=['jpg','png','jpeg'];
         $files=$request->file('images');
@@ -260,7 +257,7 @@ class AdminController extends Controller
             $gextension=$file->getClientOriginalExtension();
             $gcheck=in_array($gextension,$allowedfileExtion);
             if($gcheck){
-            $gfileName=$current_timestamp.'_'.$counter.'.'.$gextension;
+            $gfileName=$current_timestamp.'-'.$counter.'.'.$gextension;
             $this->GenerateProductThumbnailImage($file, $gfileName);
             array_push($gallery_arr,$gfileName);
             $counter= $counter+1;

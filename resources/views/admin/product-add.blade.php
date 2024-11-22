@@ -208,7 +208,7 @@
                                 <!-- /form-add-product -->
                             </div>
                             <!-- /main-content-wrap -->
-                        </div
+</div>
 @endsection
 
 @push('scripts')
