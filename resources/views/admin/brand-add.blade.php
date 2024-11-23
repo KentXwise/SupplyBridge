@@ -14,7 +14,7 @@
                                             <i class="icon-chevron-right"></i>
                                         </li>
                                         <li>
-                                            <a href="{{route('admin.brand.add')}}">
+                                            <a href="{{route('admin.brands')}}">
                                                 <div class="text-tiny">Brands</div>
                                             </a>
                                         </li>
@@ -47,7 +47,7 @@
                                             </div>
                                             <div class="upload-image flex-grow">
                                                 <div class="item" id="imgpreview" style="display:none">
-                                                    <img src="upload-1.html" class="effect8" alt="">
+                                                    <img src="{{asset('images/uploads/upload-1.png')}}" class="effect8" alt="">
                                                 </div>
                                                 <div id="upload-file" class="item up-load">
                                                     <label class="uploadfile" for="myFile">
@@ -75,7 +75,8 @@
 <script>
     $(function(){
         $("#myFile").on("change", function(e){
-            const [file] = this.files;
+           const photoInp = $("#myFile");
+           const [file] = this.files;
             if(file){
                 $("#imgpreview img").attr('src', URL.createObjectURL(file));
                 $("#imgpreview").show();
