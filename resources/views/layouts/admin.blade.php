@@ -24,7 +24,6 @@
 <link rel="apple-touch-icon-precomposed" href="{{ asset('images/favicon.ico')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css')}}">
-
     @stack("style")
     </head>
     
@@ -473,9 +472,19 @@
     <script src="{{asset ('js/jquery.min.js')}}"></script>
     <script src="{{asset ('js/bootstrap.min.js')}}"></script>
     <script src="{{asset ('js/bootstrap-select.min.js')}}"></script>   
-    <script src="{{asset ('js/sweetalert.min.js')}}"></script>    
     <script src="{{asset ('js/apexcharts/apexcharts.js')}}"></script>
     <script src="{{asset ('js/main.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Remove the duplicate SweetAlert2 script that was in head -->
+    <script>
+        // Add CSRF token to all AJAX requests
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+    @stack('scripts')
     <script>
         (function ($) {
 

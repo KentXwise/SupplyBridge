@@ -58,7 +58,9 @@ class AdminController extends Controller
         }
         $img = Image::read($image->path());
         $img->cover(124, 124, "top");
-        $img->resize(124, 124);
+        $img->resize(124, 124,function($constraint){
+            $constraint->aspectRatio();
+        });
         $img->save($destinationPath.'/'.$imageName);
     }
     public function brand_edit($id)
@@ -97,6 +99,20 @@ class AdminController extends Controller
     $brand->save();
     return redirect()->route('admin.brands')->with('success', 'Brand updated successfully');
 }
+public function delete_brand($id)
+    {
+        $brand = Brand::find($id);
+        if (!$brand) {
+            return redirect()->route('admin.brands')->with('error', 'Brand not found.');
+        }
+
+        if (File::exists(public_path('uploads/brands').'/'.$brand->image)) {
+            File::delete(public_path('uploads/brands').'/'.$brand->image);
+        }
+
+        $brand->delete();
+        return redirect()->route('admin.brands')->with('success', 'Brand deleted successfully.');
+    }
 
     
 
@@ -137,10 +153,6 @@ class AdminController extends Controller
     public function GenerateCategoryThumbnailsImage($image, $imageName)
     {
         $destinationPath = public_path('uploads/categories');
-        
-        if (!File::exists($destinationPath)) {
-            File::makeDirectory($destinationPath, 0755, true);
-        }
         $img = Image::read($image->path());
         $img->cover(124, 124, "top");
         $img->resize(124, 124);
@@ -155,32 +167,50 @@ class AdminController extends Controller
         
     }
     public function category_update(Request $request){
-        $request->validate([
-            'name' => 'required',
-            'slug' => 'required|unique:categories,slug'.$request->id,
-            'image' => 'mimes:png,jpg,jpeg|max:2048',
-        ]);
-
-        $category = new Category();
-        $category->name = $request->name;
-        $category->slug = Str::slug($request->name);
-        $image = $request->file('image');
-        $file_extention = $image->extension();
-        $file_name = Carbon::now()->timestamp.'.'.$file_extention;
-        $this->GenerateCategoryThumbnailsImage($image, $file_name);
-        $category->image = $file_name;
-        $category->save();
-
-
+        
+            $request->validate([
+                'name' => 'required',
+                'slug' => 'required|unique:categories,slug,'.$request->id,
+                'image' => 'mimes:png,jpg,jpeg|max:2048',
+            ]);
+        
+            $category = Category::find($request->id);
+            if (!$category) {
+                return redirect()->back()->with('error', 'Category not found.');
+            }
+        
+            $category->name = $request->name;
+            $category->slug = Str::slug($request->name);
+        
+            if ($request->hasFile('image')) {
+                if (File::exists(public_path('uploads/categories').'/'.$category->image)) {
+                    File::delete(public_path('uploads/categories').'/'.$category->image);
+                }
+        
+                $image = $request->file('image');
+                $file_name = Carbon::now()->timestamp.'.'.$image->extension();
+                $this->GenerateCategoryThumbnailsImage($image, $file_name);
+                $category->image = $file_name;
+            }
+        
+            $category->save();
+            return redirect()->route('admin.categories')->with('success', 'Category updated successfully');
+        
     }
     public function category_delete($id){
         $category = Category::find($id);
-        if(File::exists(public_path('uploads/categories').'/'.$category->image)){
+        if (!$category) {
+            return redirect()->route('admin.categories')->with('error', 'Brand not found.');
+        }
+    
+        if (File::exists(public_path('uploads/categories').'/'.$category->image)) {
             File::delete(public_path('uploads/categories').'/'.$category->image);
         }
+    
         $category->delete();
-        return redirect()->route('admin.categories')->with('status', 'Category has been deleted successfully');
+        return redirect()->route('admin.categories')->with('success', 'Category deleted successfully.');
     }
+ 
 
   public function products()
   {

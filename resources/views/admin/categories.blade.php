@@ -62,14 +62,14 @@
                             <td>{{$category->id}}</td>    
                             <td class="pname">
                                 <div class="image">
-                                    <img src="{{asset('uploads/categories/' . $category->image)}}" alt="" class="image">
+                                    <img src="{{asset('uploads/categories')}}/{{ $category->image}}" alt="{{$category->name}}" class="image">
                                 </div>
                                 <div class="name">
                                     <a href="#" class="body-title-2">{{ $category->name }}</a>                                       
                                 </div>  
                             </td>
-                            <td>{{$category->slug}}</td>      
-                            <td><a href="{{route('admin.products',['category_slug'=>$category->slug])}}" target="_blank">{{$category->products()->count()}}</a></td>                               
+                            <td>{{ $category->slug }}</td>      
+                            <td><a href="#" target="_blank">0</a></td>                               
                             <td>
                                 <div class="list-icon-function">    
                                 <a href="{{route('admin.category.edit',['id'=>$category->id])}}">                                
@@ -78,12 +78,12 @@
                                    </div>
                                 </a>
 
-                                <form action="{{route('admin.category.delete',['id'=>$category->id])}}" method="POST">
+                                <form action="{{route('admin.category.delete',['id'=>$category->id])}}" method="POST" class="delete-form">
                                          @csrf
                                          @method('DELETE')
-                                             <div class="item text-danger delete">
+                                             <button type="submit" class="item text-danger delete">
                                             <i class="icon-trash-2"></i>
-                                     </div>
+                                     </button>
                                 </form>
                                 </div>
                             </td>
@@ -102,22 +102,27 @@
 @endsection
 
 @push('scripts')
-    <script>
-        $(function(){
-            $(".delete").on('click',function(e){
-                e.preventDefault();
-                var selectedForm = $(this).closest('form');
-                swal({
-                    title: "Are you sure?",
-                    text: "You want to delete this record?",
-                    type: "warning",
-                    buttons: ["No!", "Yes!"],
-                    confirmButtonColor: '#dc3545'
-                }).then(function (result) {
-                    if (result) {
-                        selectedForm.submit();  
-                    }
-                });                             
-            });
+<script>
+$(document).ready(function(){
+    $(document).on('click', '.delete', function(e){
+        e.preventDefault();
+        const form = $(this).closest('form');
+        
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This action cannot be undone!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
         });
-    </script>
+    });
+});
+</script>
+@endpush
