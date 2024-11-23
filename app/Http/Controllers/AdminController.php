@@ -21,8 +21,8 @@ class AdminController extends Controller
 
     public function brands()
     {
-        $brands = Brand::orderBy('id', 'DESC')->paginate(10);
-        return view('admin.brands', compact('brands'));
+       $brands = Brand::orderBy('id', 'DESC')->paginate(10);
+        return view('admin.brands', compact( 'brands'));
     }
 
     public function add_Brand()
@@ -52,14 +52,16 @@ class AdminController extends Controller
     public function GenerateBrandThumbnailsImage($image, $imageName)
     {
         $destinationPath = public_path('uploads/brands');
+        
         if (!File::exists($destinationPath)) {
             File::makeDirectory($destinationPath, 0755, true);
         }
         $img = Image::read($image->path());
-        $img->cover(124,124,"top");
-        $img->resize(124,124, function($constraint){
+        $img->cover(124, 124, "top");
+        $img->resize(124, 124,function($constraint){
             $constraint->aspectRatio();
-        })->save($destinationPath.'/'.$imageName);
+        });
+        $img->save($destinationPath.'/'.$imageName);
     }
     public function brand_edit($id)
     {
@@ -84,7 +86,6 @@ class AdminController extends Controller
     $brand->slug = Str::slug($request->name);
 
     if ($request->hasFile('image')) {
-        // Delete old image if exists
         if (File::exists(public_path('uploads/brands').'/'.$brand->image)) {
             File::delete(public_path('uploads/brands').'/'.$brand->image);
         }
@@ -98,65 +99,65 @@ class AdminController extends Controller
     $brand->save();
     return redirect()->route('admin.brands')->with('success', 'Brand updated successfully');
 }
+public function delete_brand($id)
+    {
+        $brand = Brand::find($id);
+        if (!$brand) {
+            return redirect()->route('admin.brands')->with('error', 'Brand not found.');
+        }
+
+        if (File::exists(public_path('uploads/brands').'/'.$brand->image)) {
+            File::delete(public_path('uploads/brands').'/'.$brand->image);
+        }
+
+        $brand->delete();
+        return redirect()->route('admin.brands')->with('success', 'Brand deleted successfully.');
+    }
 
     
 
     public function categories(){
-        try {
-            $categories = Category::orderBy('id', 'DESC')->paginate(10);
-            return view('admin.categories', compact('categories'));
-        } catch (\Exception $e) {
-            Log::error('Error fetching categories: '.$e->getMessage());
-            return redirect()->back()->with('error', 'An error occurred while fetching the categories.');
-        }
+        
+      $categories = Category::orderBy('id', 'DESC')->paginate(10);
+      return view('admin.categories', compact('categories'));
+
     }
     public function category_add(){
         return view('admin.category-add');
     }
     public function category_store(Request $request)
     {
-        try {
+       
             $request->validate([
                 'name' => 'required',
                 'slug' => 'required|unique:categories,slug',
                 'image' => 'mimes:png,jpg,jpeg|max:2048',
             ]);
 
-            $category = new Category();
-            $category->name = $request->name;
-            $category->slug = Str::slug($request->name);
-
-            if ($request->hasFile('image')) {
+                $category = new Category();
+                $category->name = $request->name;
+                $category->slug = Str::slug($request->name);
                 $image = $request->file('image');
                 $file_extention = $image->extension();
                 $file_name = Carbon::now()->timestamp.'.'.$file_extention;
-                $this->GenerateCategoriesThumbnailsImage($image, $file_name);
+                $this->GenerateCategoryThumbnailsImage($image, $file_name);
                 $category->image = $file_name;
+                $category->save();
+                return redirect()->route('admin.categories')->with('success', 'Category added successfully');
+                
             }
 
-            $category->save();
-            return redirect()->route('admin.categories')->with('success', 'Category added successfully');
-        } catch (\Exception $e) {
-            Log::error('Error adding category: '.$e->getMessage());
-            return redirect()->back()->with('error', 'An error occurred while adding the category.');
-        }
-    }
+      
+    
 
-    public function GenerateCategoriesThumbnailsImage($image, $imageName)
+    public function GenerateCategoryThumbnailsImage($image, $imageName)
     {
-        try {
-            $destinationPath = public_path('uploads/categories');
-            if (!File::exists($destinationPath)) {
-                File::makeDirectory($destinationPath, 0755, true);
-            }
-            $img = Image::read($image->path()); // Ensure this line is correct
-            $img->resize(124, 124, function($constraint){
-                $constraint->aspectRatio();
-            })->save($destinationPath.'/'.$imageName);
-        } catch (\Exception $e) {
-            Log::error('Error generating category thumbnail: '.$e->getMessage());
-            throw $e;
-        }
+        $destinationPath = public_path('uploads/categories');
+        $img = Image::read($image->path());
+        $img->cover(124, 124, "top");
+        $img->resize(124, 124);
+        $img->save($destinationPath.'/'.$imageName);
+    
     }
     public function category_edit($id)
     {
@@ -166,29 +167,35 @@ class AdminController extends Controller
         
     }
     public function category_update(Request $request){
-        $request->validate([
-            'name' => 'required',
-            'slug' => 'required|unique:categories,slug'.$request->id,
-            'image' => 'mimes:png,jpg,jpeg|max:2048',
-        ]);
-
-        $category = Category::find($request->id);
-        $category->name = $request->name;
-        $category->slug = Str::slug($request->name);
-        if ($request->hasFile('image')) {
-            if(File::exists(public_path('uploads/categories').'/'.$category->image)){
-                File::delete(public_path('uploads/categories').'/'.$category->image);
+        
+            $request->validate([
+                'name' => 'required',
+                'slug' => 'required|unique:categories,slug,'.$request->id,
+                'image' => 'mimes:png,jpg,jpeg|max:2048',
+            ]);
+        
+            $category = Category::find($request->id);
+            if (!$category) {
+                return redirect()->back()->with('error', 'Category not found.');
             }
-            $image = $request->file('image');
-            $file_extention = $image->extension();
-            $file_name = Carbon::now()->timestamp.'.'.$file_extention;
-            $this->GenerateCategoriesThumbnailsImage($image, $file_name);
-            $category->image = $file_name;
-        }
-        $category->save();
-        return redirect()->route('admin.categories')->with('status', 'Category has been updated successfully'); 
-
-
+        
+            $category->name = $request->name;
+            $category->slug = Str::slug($request->name);
+        
+            if ($request->hasFile('image')) {
+                if (File::exists(public_path('uploads/categories').'/'.$category->image)) {
+                    File::delete(public_path('uploads/categories').'/'.$category->image);
+                }
+        
+                $image = $request->file('image');
+                $file_name = Carbon::now()->timestamp.'.'.$image->extension();
+                $this->GenerateCategoryThumbnailsImage($image, $file_name);
+                $category->image = $file_name;
+            }
+        
+            $category->save();
+            return redirect()->route('admin.categories')->with('success', 'Category updated successfully');
+        
     }
     public function category_delete($id){
         $category = Category::find($id);
@@ -273,20 +280,32 @@ class AdminController extends Controller
         return redirect()->route('admin.products')->with('success', 'Product has been added successfully');
     }
   
-  public function GenerateProductThumbnailImage($image, $imageName){
-    $destinationPathThumbnail = public_path('uploads/products/thumbnails');
-    $destinationPath = public_path('uploads/products');
-    $img = Image::read($image->path());
-
-    $img->cover(540, 689,'top');
-    $img->resize(540, 689, function ($constraint) {
-        $constraint->aspectRatio();
-    })->save($destinationPath.'/'.$imageName);
-
-    $img->resize(540, 689, function ($constraint) {
-        $constraint->aspectRatio();
-    })->save($destinationPathThumbnail.'/'.$imageName);
-  }
+    public function GenerateProductThumbnailImage($image, $imageName)
+    {
+        // Set paths
+        $destinationPathThumbnail = public_path('uploads/products/thumbnails');
+        $destinationPath = public_path('uploads/products');
+    
+        // Create directories if they don't exist
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0755, true);
+        }
+        if (!File::exists($destinationPathThumbnail)) {
+            File::makeDirectory($destinationPathThumbnail, 0755, true);
+        }
+    
+        // Process main image
+        $img = Image::read($image->path());
+        $img->cover(540, 689, 'top');
+        $img->save($destinationPath . '/' . $imageName);
+    
+        // Create thumbnail from original image
+        $thumbnail = Image::read($image->path());
+        $thumbnail->cover(540, 689, 'top');
+        $thumbnail->save($destinationPathThumbnail . '/' . $imageName);
+    
+        return true;
+    }
 
   public function product_edit($id)
   {

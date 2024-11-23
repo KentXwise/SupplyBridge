@@ -28,11 +28,10 @@
         </div>
         <!-- new-category -->
         <div class="wg-box">
-            @csrf
-            @method('PUT')
-            <input type="hidden" name="id" value={{$brand->id}}/>
             <form class="form-new-product form-style-1" action="{{route('admin.category.update')}}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
+                <input type="hidden" name="id" value="{{$category->id}}"/>
                 <fieldset class="name">
                     <div class="body-title">Category Name <span class="tf-color-1">*</span></div>
                     <input class="flex-grow" type="text" placeholder="Category name" name="name"
@@ -52,7 +51,6 @@
                         @if($category->image)
                         <div class="item" id="imgpreview">
                             <img src="{{asset('uploads/categories')}}/{{$category->image}}" class="effect8" alt="">
-                            <img src="upload-1.html" class="effect8" alt="">
                         </div>
                         @endif
                         <div id="upload-file" class="item up-load">
