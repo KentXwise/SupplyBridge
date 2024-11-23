@@ -199,12 +199,18 @@ public function delete_brand($id)
     }
     public function category_delete($id){
         $category = Category::find($id);
-        if(File::exists(public_path('uploads/categories').'/'.$category->image)){
+        if (!$category) {
+            return redirect()->route('admin.categories')->with('error', 'Brand not found.');
+        }
+    
+        if (File::exists(public_path('uploads/categories').'/'.$category->image)) {
             File::delete(public_path('uploads/categories').'/'.$category->image);
         }
+    
         $category->delete();
-        return redirect()->route('admin.categories')->with('status', 'Category has been deleted successfully');
+        return redirect()->route('admin.categories')->with('success', 'Category deleted successfully.');
     }
+ 
 
   public function products()
   {
