@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-public function products()
+public function category()
 {
     return $this->belongsTo(Category::class,'category_id');
 }
