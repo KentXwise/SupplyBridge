@@ -325,7 +325,7 @@ public function delete_brand($id)
   {
     $request->validate([
         'name' => 'required',
-        'slug' => 'required|unique:products,slug'.$request->id,
+        'slug' => 'required|unique:products,slug,'.$request->id, // Fixed concatenation syntax
         'short_description' => 'required',
         'description' => 'required',
         'regular_price' => 'required',
@@ -394,8 +394,8 @@ public function delete_brand($id)
             if($gcheck){
             $gfileName=$current_timestamp.'_'.$counter.'.'.$gextension;
             $this->GenerateProductThumbnailImage($file, $gfileName);
-            array_push($gallery_arr =[],$gfileName);
-            $counter= $counter+1;
+            $gallery_arr[] = $gfileName; // Use array push shorthand
+            $counter++;
             }
         }
         $gallery_images=implode(',',$gallery_arr);
@@ -403,7 +403,7 @@ public function delete_brand($id)
         }
         
         $product->save();
-        return redirect()->route('admin.products')->with('status'.'Product has been updated successfully!');
+        return redirect()->route('admin.products')->with('success', 'Product has been updated successfully!');
   }
 
   public function product_detele($id)
