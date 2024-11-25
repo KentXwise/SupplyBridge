@@ -11,6 +11,7 @@ use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 use App\Models\Product;
+use App\Models\Order;
 
 class AdminController extends Controller
 {
@@ -58,9 +59,7 @@ class AdminController extends Controller
         }
         $img = Image::read($image->path());
         $img->cover(124, 124, "top");
-        $img->resize(124, 124,function($constraint){
-            $constraint->aspectRatio();
-        });
+        $img->resize(124, 124);
         $img->save($destinationPath.'/'.$imageName);
     }
     public function brand_edit($id)
@@ -432,5 +431,8 @@ public function delete_brand($id)
     return redirect()->route('admin.products')->with('status','Products has been deleted successfully');
     
   }
-
+  public function orders(){
+    $orders = Order::orderBy('created at', 'DESC')->paginate(12);
+    return view('admin.order', compact('orders'));
+  }
 }
