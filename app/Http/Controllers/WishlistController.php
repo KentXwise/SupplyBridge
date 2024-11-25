@@ -25,4 +25,14 @@ class WishlistController extends Controller
 
         return redirect()->back();
     }
+    public function remove_item($rowId)
+    {
+        Cart::instance('wishlist')->remove($rowId);
+        return redirect()->back();
+    }
+    public function empty_wishlist()
+    {
+        Cart::instance('wishlist')->destroy();
+        return redirect()->back();
+    }
 }
