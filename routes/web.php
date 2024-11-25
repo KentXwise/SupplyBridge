@@ -17,9 +17,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/shop',[ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop/{product_slug}',[ShopController::class,'product_details'])->name('shop.product.details');
 
-Route::get('/cart',[CartController::class, 'index'])->name('cart.index');
+
 Route::post('cart/add',[CartController::class, 'add_to_cart'])->name('cart.add');
-Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 Route::put('/cart/increase-quantity/{rowId}',[CartController::class, 'increase_cart_quantity'])->name('cart.qty.increase');
 Route::put('/cart/decrease-quantity/{rowId}',[CartController::class, 'decrease_cart_quantity'])->name('cart.qty.decrease');
 Route::delete('/cart/remove/{rowId}',[CartController::class, 'remove_item'])->name('cart.item.remove');
@@ -31,6 +30,11 @@ Route::delete('/wishlist/item/remove/{rowId}', [WishlistController::class, 'remo
 Route::delete('/wishlist/clear', [WishlistController::class, 'empty_wishlist'])->name('wishlist.item.clear');
 
 
+
+Route::get('/cart',[CartController::class, 'index'])->name('cart.index');
+Route::get('/checkout',[CartController::class, 'checkout'])->name('cart.checkout');
+Route::post('/place-an-order',[CartController::class, 'place_an_order'])->name('cart.place.an.order');
+Route::get('/order-confirmation',[CartController::class, 'order_confirmation'])->name('cart.order.confirmation');
 
 Route::middleware(['auth'])->group(function () {
 Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
