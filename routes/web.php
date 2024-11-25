@@ -10,6 +10,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\WishlistController;
 
+
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
@@ -27,14 +28,10 @@ Route::post('/wishlist/add', [WishlistController::class, 'add_to_wishlist'])->na
 Route::get('/wishlist', [WishlistController::class,'index'])->name('wishlist.index');
 
 
-
-Route::get('/cart',[CartController::class, 'index'])->name('cart.index');
-
-Route::get('/checkout',[CartController::class, 'checkout'])->name('cart.checkout');
-
 Route::middleware(['auth'])->group(function () {
 Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
 Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
+Route::get('/account-order/{order_id}/details', [UserController::class, 'order_details'])->name('user.order.details');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {
@@ -59,6 +56,6 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::delete('/admin/product/{id}/delete', [AdminController::class, 'product_detele'])->name('admin.product.delete');
    
     Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
-    Route::gete('/admin/order/{order_id}/details',[AdminController::class,'order_details']->name('admin.order.details'));
+    Route::get('/admin/order/{order_id}/details',[AdminController::class,'order_details'])->name('admin.order.details');
 
 });
