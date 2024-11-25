@@ -111,10 +111,15 @@
 
             <div class="wg-box">
                                     <div class="flex items-center justify-between gap10 flex-wrap">
-                                        <div class="wg-filter flex-grow">
-                                            <h5>Ordered Items</h5>
+                                        <div class="row">
+                                            <div class="col-6">
+                                            <h5>Ordered Details</h5>
+                                            </div>
                                         </div>
-                                        <a class="tf-button style-1 w208" href="{{route('admin.orders')}}">Back</a>
+                                        <div class="col-6 text-right">
+                                        <a class="tf-button style-1 w208" href="{{route('user.orders')}}">Back</a>
+                                        </div>
+                                        
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered">
@@ -256,17 +261,11 @@
                                                     @endif
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <th>Order Date</th>
-                                                <td>2024-07-11 00:54:14</td>
-                                                <th>Delivered Date</th>
-                                                <td></td>
-                                                <th>Canceled Date</th>
-                                                <td></td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
+
+                             
             </div>
             
         </div>
