@@ -32,6 +32,7 @@ Route::get('/cart',[CartController::class, 'index'])->name('cart.index');
 
 Route::middleware(['auth'])->group(function () {
 Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
+Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {
@@ -54,5 +55,8 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/admin/product/{id}/edit', [AdminController::class, 'product_edit'])->name('admin.product.edit');
     Route::put('/admin/product/update',[AdminController::class, 'product_update'])->name('admin.product.update');
     Route::delete('/admin/product/{id}/delete', [AdminController::class, 'product_detele'])->name('admin.product.delete');
+   
+    Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+    Route::gete('/admin/order/{order_id}/details',[AdminController::class,'order_details']->name('admin.order.details'));
 
 });
