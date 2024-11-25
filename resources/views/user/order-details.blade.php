@@ -143,7 +143,7 @@
                                            <tr>
                                             <th>Order Status</th>
                                             <td colspan="5">
-                                                @if($oder->status == 'delivered')
+                                                @if($order->status == 'delivered')
                                                 <span class="badge bg-success">Delivered</span>
                                                 @elseif($order->status == 'canceled')
                                                 <span class="badge bg-danger">Cancelled</span>
