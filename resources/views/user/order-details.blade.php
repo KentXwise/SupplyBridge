@@ -149,6 +149,7 @@
                                                 <span class="badge bg-danger">Cancelled</span>
                                                 @else
                                                 <span class="badge bg-warning">Ordered</span>
+                                                @endif
                                             </td>
 
                                            </tr>

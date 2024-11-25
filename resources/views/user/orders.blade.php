@@ -58,8 +58,9 @@
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Order Date</th>
                                     <th class="text-center">Items</th>
+                              
                                     <th class="text-center">Delivered On</th>
-                                    <th></th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -75,11 +76,9 @@
                                     <td class="text-center">{{$order->created_at}}</td>
                                     <td class="text-center">{{$order->orderItems->count()}}</td>
                                     <td class="text-center">{{$order->delivered_date}}</td>
-                                    <td class="text-center">
-                                 <span class="badge bg-danger">Canceled</span>
-                                                                            </td>
+                                  
                                     <td class="text-center">2024-07-11 00:54:14</td>
-                                    <td class="text-center">2</td>
+                                   
                                     <td>2024-07-07</td>
                                     <td class="text-center">
                                         <a href="account-orders-details.html">
