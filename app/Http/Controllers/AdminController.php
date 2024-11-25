@@ -14,6 +14,7 @@ use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
+
 class AdminController extends Controller
 {
     public function index()

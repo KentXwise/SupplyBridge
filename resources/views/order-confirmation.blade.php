@@ -52,7 +52,7 @@
             <span>{{$order->total}}</span>
           </div>
           <div class="order-info__item">
-            <label>Paymetn Method</label>
+            <label>Payment Method</label>
             <span>{{$order->transaction->mode}}</span>
           </div>
         </div>
@@ -68,16 +68,15 @@
               </thead>
               <tbody>
                 @foreach ($order->orderItems as $item)
-
-                @endforeach
                 <tr>
                   <td>
-                  {{$item->product->name}} x {{$item->quantity}}
+                    {{$item->product->name}} x {{$item->quantity}}
                   </td>
                   <td>
                     ${{$item->price}}
                   </td>
                 </tr>
+                @endforeach
               </tbody>
             </table>
             <table class="checkout-totals">

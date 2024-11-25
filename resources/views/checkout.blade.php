@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content')
+@section('content')  
 <main class="pt-90">
     <div class="mb-4 pb-4"></div>
     <section class="shop-checkout container">
@@ -61,42 +61,42 @@
             <div class="row mt-5">
               <div class="col-md-6">
                 <div class="form-floating my-3">
-                  <input type="text" class="form-control" name="name" required="" value="{{Old('name')}}">
+                  <input type="text" class="form-control" name="name" required="" value="{{old('name')}}">
                   <label for="name">Full Name *</label>
                   @error('name') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-floating my-3">
-                  <input type="text" class="form-control" name="phone" required="" value="{{Old('phone')}}">
+                  <input type="text" class="form-control" name="phone" required="" value="{{old('phone')}}">
                   <label for="phone">Phone Number *</label>
                   @error('phone') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-floating my-3">
-                  <input type="text" class="form-control" name="zip" require="" value="{{Old('zip')}}">
+                  <input type="text" class="form-control" name="zip" require="" value="{{old('zip')}}">
                   <label for="zip">Pincode *</label>
                   @error('zip') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-floating mt-3 mb-3">
-                  <input type="text" class="form-control" name="state" required="" value="{{Old('state')}}">
+                  <input type="text" class="form-control" name="state" required="" value="{{old('state')}}">
                   <label for="state">State *</label>
                   @error('state') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-floating my-3">
-                  <input type="text" class="form-control" name="city" required="" value="{{Old('city')}}">
+                  <input type="text" class="form-control" name="city" required="" value="{{old('city')}}">
                   <label for="city">Town / City *</label>
                   @error('city') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-floating my-3">
-                  <input type="text" class="form-control" name="address" required="" value="{{Old('address')}}">
+                  <input type="text" class="form-control" name="address" required="" value="{{old('address')}}">
                   <label for="address">House no, Building Name *</label>
                   @error('address') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
@@ -130,10 +130,10 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach (Cart::instance('cart') as $item)
+                    @foreach (Cart::instance('cart')->content() as $item)
                     <tr>
                       <td>
-                        {{$item->name}} x {{$item->$qty}}
+                        {{$item->name}} x {{$item->qty}}
                       </td>
                       <td align="right">
                         ${{$item->subtotal()}}

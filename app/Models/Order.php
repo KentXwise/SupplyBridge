@@ -16,7 +16,7 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
-    public function payment()
+    public function Transaction()
     {
         return $this->hasOne(Transaction::class);
     }

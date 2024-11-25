@@ -13,6 +13,7 @@ use Surfsidemedia\Shoppingcart\Facades\Cart;
 
 
 
+
 class CartController extends Controller
 {
     public function index()
@@ -95,7 +96,7 @@ class CartController extends Controller
         $address->address = $request->address;
         $address->locality = $request->locality;
         $address->landmark = $request->landmark;
-        $address->country = 'philippines';
+        $address->country = 'Philippines';
         $address->user_id = $user_id;
         $address->isdefault = true;
         $address->save();
@@ -105,9 +106,9 @@ class CartController extends Controller
 
      $order = new Order();
      $order->user_id = $user_id;
-     $order->subtotal = Session::get('checkout')['subtotal'];
-     $order->tax = Session::get('checkout')['tax'];
-     $order->total = Session::get('checkout')['total'];
+     $order->subtotal = str_replace(',', '', Cart::instance('cart')->subtotal());
+     $order->tax = str_replace(',', '', Cart::instance('cart')->tax());
+     $order->total = str_replace(',', '', Cart::instance('cart')->total());
      $order->name = $address->name;
      $order->phone = $address->phone;
      $order->locality = $address->locality;
