@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Surfsidemedia\Shoppingcart\Facades\Cart;
+
 
 class CartController extends Controller
 {
@@ -48,4 +51,14 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    public function checkout()
+    {
+        if(!Auth::check())
+        {
+            return redirect()->route('login');
+        }
+
+        $address = Address::where('user_id',Auth::user()->id)->where('isdefault',1)->first();
+        return view('checkout',compact('address'));
+    }
 }
