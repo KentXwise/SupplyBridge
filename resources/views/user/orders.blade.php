@@ -82,7 +82,7 @@
                                     <td class="text-center">{{$order->orderItems->count()}}</td>
                                     <td class="text-center">{{$order->delivered_date}}</td>
                                     <td class="text-center">
-                                        <a href="{{route('user.oreder.details',['order_id'=>$order->id])}}">
+                                        <a href="{{route('user.order.details',['order_id'=>$order->id])}}">
                                         <div class="list-icon-function view-icon">
                                             <div class="item eye">
                                                 <i class="fa fa-eye"></i>
