@@ -38,7 +38,7 @@
                                             <table class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th style="width:70px">OrderNo</th>
+                                                        <th style="width:70px">Order No</th>
                                                         <th class="text-center">Name</th>
                                                         <th class="text-center">Phone</th>
                                                         <th class="text-center">Subtotal</th>

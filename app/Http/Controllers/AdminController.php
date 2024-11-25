@@ -435,7 +435,7 @@ public function delete_brand($id)
   }
   public function orders()
   {
-      $orders = Order::orderBy('created at', 'DESC')->paginate(12);
+      $orders = Order::orderBy('created_at', 'DESC')->paginate(12);
       return view('admin.orders', compact('orders'));
   }
   public function order_details($order_id){
