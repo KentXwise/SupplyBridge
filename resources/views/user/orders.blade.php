@@ -54,7 +54,6 @@
                                     <th class="text-center">Subtotal</th>
                                     <th class="text-center">Tax</th>
                                     <th class="text-center">Total</th>
-                                    
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Order Date</th>
                                     <th class="text-center">Items</th>
@@ -71,18 +70,19 @@
                                     <td class="text-center">{{$order->subtotal}}</td>
                                     <td class="text-center">{{$order->tax}}</td>
                                     <td class="text-center">{{$order->total}}</td>                                   
-                                    <td class="text-center">{{$order->status}}</td>
+                                    <td class="text-center">
+                                      @if($order->status == 'delivered')
+                                                <span class="badge bg-success">Delivered</span>
+                                                @elseif($order->status == 'canceled')
+                                                <span class="badge bg-danger">Cancelled</span>
+                                                @else
+                                                <span class="badge bg-warning">Ordered</span>
+                                                @endif</td>
                                     <td class="text-center">{{$order->created_at}}</td>
                                     <td class="text-center">{{$order->orderItems->count()}}</td>
                                     <td class="text-center">{{$order->delivered_date}}</td>
                                     <td class="text-center">
-                                 <span class="badge bg-danger">Canceled</span>
-                                                                            </td>
-                                    <td class="text-center">2024-07-11 00:54:14</td>
-                                    <td class="text-center">2</td>
-                                    <td>2024-07-07</td>
-                                    <td class="text-center">
-                                        <a href="account-orders-details.html">
+                                        <a href="{{route('user.oreder.details',['order_id'=>$order->id])}}">
                                         <div class="list-icon-function view-icon">
                                             <div class="item eye">
                                                 <i class="fa fa-eye"></i>
