@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use App\Models\User;
 
 
+
 class UserController extends Controller
 {
     public function index()
@@ -24,7 +25,7 @@ class UserController extends Controller
         if($order){
             $orderItems = OrderItem::where('order_id',$order_id)->orderBy('id')->paginate(12);
             $transaction = Transaction::where('order_id',$order_id)->first();
-            return view('user.order_details',compact('order','orderItems','transaction'));
+            return view('user.order-details',compact('order','orderItems','transaction'));
         }else{
             return redirect()->route('login');
         }
