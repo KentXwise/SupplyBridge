@@ -27,8 +27,10 @@ Route::post('/wishlist/add', [WishlistController::class, 'add_to_wishlist'])->na
 Route::get('/wishlist', [WishlistController::class,'index'])->name('wishlist.index');
 
 
+
 Route::get('/cart',[CartController::class, 'index'])->name('cart.index');
 
+Route::get('/checkout',[CartController::class, 'checkout'])->name('cart.checkout');
 
 Route::middleware(['auth'])->group(function () {
 Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
