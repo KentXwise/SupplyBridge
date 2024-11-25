@@ -11,6 +11,7 @@ use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 use App\Models\Product;
+use App\Models\Order;
 
 class AdminController extends Controller
 {
@@ -58,9 +59,7 @@ class AdminController extends Controller
         }
         $img = Image::read($image->path());
         $img->cover(124, 124, "top");
-        $img->resize(124, 124,function($constraint){
-            $constraint->aspectRatio();
-        });
+        $img->resize(124, 124);
         $img->save($destinationPath.'/'.$imageName);
     }
     public function brand_edit($id)
@@ -325,7 +324,7 @@ public function delete_brand($id)
   {
     $request->validate([
         'name' => 'required',
-        'slug' => 'required|unique:products,slug'.$request->id,
+        'slug' => 'required|unique:products,slug,'.$request->id, // Fixed concatenation syntax
         'short_description' => 'required',
         'description' => 'required',
         'regular_price' => 'required',
@@ -394,8 +393,8 @@ public function delete_brand($id)
             if($gcheck){
             $gfileName=$current_timestamp.'_'.$counter.'.'.$gextension;
             $this->GenerateProductThumbnailImage($file, $gfileName);
-            array_push($gallery_arr =[],$gfileName);
-            $counter= $counter+1;
+            $gallery_arr[] = $gfileName; // Use array push shorthand
+            $counter++;
             }
         }
         $gallery_images=implode(',',$gallery_arr);
@@ -403,7 +402,7 @@ public function delete_brand($id)
         }
         
         $product->save();
-        return redirect()->route('admin.products')->with('status'.'Product has been updated successfully!');
+        return redirect()->route('admin.products')->with('success', 'Product has been updated successfully!');
   }
 
   public function product_detele($id)
@@ -432,5 +431,8 @@ public function delete_brand($id)
     return redirect()->route('admin.products')->with('status','Products has been deleted successfully');
     
   }
-
+  public function orders(){
+    $orders = Order::orderBy('created at', 'DESC')->paginate(12);
+    return view('admin.order', compact('orders'));
+  }
 }

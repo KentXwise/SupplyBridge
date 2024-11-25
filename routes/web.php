@@ -8,6 +8,7 @@ use App\Http\Middleware\AuthAdmin;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\WishlistController;
 
 
 Auth::routes();
@@ -18,17 +19,23 @@ Route::get('/shop/{product_slug}',[ShopController::class,'product_details'])->na
 
 Route::get('/cart',[CartController::class, 'index'])->name('cart.index');
 Route::post('cart/add',[CartController::class, 'add_to_cart'])->name('cart.add');
+Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 Route::put('/cart/increase-quantity/{rowId}',[CartController::class, 'increase_cart_quantity'])->name('cart.qty.increase');
 Route::put('/cart/decrease-quantity/{rowId}',[CartController::class, 'decrease_cart_quantity'])->name('cart.qty.decrease');
 Route::delete('/cart/remove/{rowId}',[CartController::class, 'remove_item'])->name('cart.item.remove');
 Route::delete('/cart/clear/',[CartController::class, 'empty_cart'])->name('cart.empty');
 
+Route::post('/wishlist/add', [WishlistController::class, 'add_to_wishlist'])->name('wishlist.add');
+Route::get('/wishlist', [WishlistController::class,'index'])->name('wishlist.index');
+Route::delete('/wishlist/item/remove/{rowId}', [WishlistController::class, 'remove_item'])->name('wishlist.item.remove');
+Route::delete('/wishlist/clear', [WishlistController::class, 'empty_wishlist'])->name('wishlist.item.clear');
 
-Route::get('/cart',[CartController::class, 'index'])->name('cart.index');
 
 
 Route::middleware(['auth'])->group(function () {
 Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
+Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
+Route::get('/account-order/{order_id}/details', [UserController::class, 'order_details'])->name('user.order.details');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {
@@ -51,5 +58,8 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/admin/product/{id}/edit', [AdminController::class, 'product_edit'])->name('admin.product.edit');
     Route::put('/admin/product/update',[AdminController::class, 'product_update'])->name('admin.product.update');
     Route::delete('/admin/product/{id}/delete', [AdminController::class, 'product_detele'])->name('admin.product.delete');
+   
+    Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+    Route::get('/admin/order/{order_id}/details',[AdminController::class,'order_details'])->name('admin.order.details');
 
 });
