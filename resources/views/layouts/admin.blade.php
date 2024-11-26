@@ -135,15 +135,9 @@
                                     </ul>
                                 </li>
                                 <li class="menu-item">
-                                    <a href="slider.html" class="">
-                                        <div class="icon"><i class="icon-image"></i></div>
-                                        <div class="text">Slider</div>
-                                    </a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="coupons.html" class="">
-                                        <div class="icon"><i class="icon-grid"></i></div>
-                                        <div class="text">Coup0ns</div>
+                                    <a href="{{route('admin.contacts')}}" class="">
+                                        <div class="icon"><i class="icon-mail"></i></div>
+                                        <div class="text">Messages</div>
                                     </a>
                                 </li>
 
