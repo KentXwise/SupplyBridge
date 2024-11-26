@@ -130,15 +130,15 @@ class CartController extends Controller
         $orderItem->save(); 
         
      }
-     if($request->mode=="card")
+     if($request-> mode == "card")
      {
          //
      }
-     elseif($request->mode=="paypal")
+     elseif($request-> mode == "paypal")
      {
          //
      }
-     elseif($request->mode =="cod")
+     elseif($request-> mode == "cod")
      {
      $transaction = new Transaction();
      $transaction-> user_id = $user_id;
