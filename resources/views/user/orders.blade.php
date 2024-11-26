@@ -54,7 +54,6 @@
                                     <th class="text-center">Subtotal</th>
                                     <th class="text-center">Tax</th>
                                     <th class="text-center">Total</th>
-                                    
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Order Date</th>
                                     <th class="text-center">Items</th>
@@ -73,13 +72,14 @@
                                     <td class="text-center">{{$order->tax}}</td>
                                     <td class="text-center">{{$order->total}}</td>                                   
                                     <td class="text-center">
-                                      @if($order->status == 'delivered')
-                                                <span class="badge bg-success">Delivered</span>
-                                                @elseif($order->status == 'canceled')
-                                                <span class="badge bg-danger">Cancelled</span>
-                                                @else
-                                                <span class="badge bg-warning">Ordered</span>
-                                                @endif</td>
+                                          @if ($order->status == 'delivered')
+                                          <span class="badge bg-success">Delivered</span>
+                                          @elseif($order->status == 'canceled')                 
+                                          <span class="badge bg-danger">Cancelled</span>                  
+                                          @else                  
+                                          <span class="badge bg-warning">Ordered</span>                  
+                                          @endif                   
+                                        </td>
                                     <td class="text-center">{{$order->created_at}}</td>
                                     <td class="text-center">{{$order->orderItems->count()}}</td>
                                     <td class="text-center">{{$order->delivered_date}}</td>
