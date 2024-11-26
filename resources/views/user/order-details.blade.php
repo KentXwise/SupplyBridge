@@ -184,20 +184,21 @@
 
                                                     <td class="pname">
                                                         <div class="image">
-                                                            <img src="{{asset('uploads/products/thumbnails')}}/{{$item->product->image}}" alt="" class="image">
+                                                            <img src="{{ asset('uploads/products/thumbnails/' . ($item->product->image ?? 'default.png')) }}" alt="" class="image">
                                                         </div>
                                                         <div class="name">
-                                                            <a href="{{route('shop.product.details',['product_slug' =>$item->product->slug])}}" target="_blank"
-                                                                class="body-title-2">{{$item->product->name}}</a>
+                                                            <a href="{{ route('shop.product.details', ['product_slug' => $item->product->slug ?? '#']) }}" target="_blank" class="body-title-2">
+                                                                {{ $item->product->name ?? 'N/A' }}
+                                                            </a>
                                                         </div>
                                                     </td>
-                                                    <td class="text-center">{{$item->price}}</td>
-                                                    <td class="text-center">{{$item->quantity}}</td>
-                                                    <td class="text-center">{{$item->product->SKU}}</td>
-                                                    <td class="text-center">{{$item->product->category->name}}</td>
-                                                    <td class="text-center">{{$item->brand->name}}</td>
-                                                    <td class="text-center">{{$item->options}}</td>
-                                                    <td class="text-center">{{$item->rstatus == 0 ? "No" : "Yes"}}</td>
+                                                    <td class="text-center">{{ $item->price }}</td>
+                                                    <td class="text-center">{{ $item->quantity }}</td>
+                                                    <td class="text-center">{{ $item->product->SKU ?? 'N/A' }}</td>
+                                                    <td class="text-center">{{ $item->product->category->name ?? 'N/A' }}</td>
+                                                    <td class="text-center">{{ $item->brand->name ?? 'N/A' }}</td>
+                                                    <td class="text-center">{{ $item->options }}</td>
+                                                    <td class="text-center">{{ $item->rstatus == 0 ? "No" : "Yes" }}</td>
                                                     <td class="text-center">No</td>
                                                     <td class="text-center">
                                                         <div class="list-icon-function view-icon">
