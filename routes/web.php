@@ -33,6 +33,8 @@ Route::delete('/wishlist/clear', [WishlistController::class, 'empty_wishlist'])-
 
 
 Route::get('/checkout',[CartController::class, 'checkout'])->name('cart.checkout');
+Route::get('/checkout/edit',[CartController::class, 'edit_shipping'])->name('cart.shipping.edit');
+Route::put('/checkout/update',[CartController::class, 'update_shipping'])->name('cart.shipping.update');
 Route::post('/place-an-order',[CartController::class, 'place_an_order'])->name('cart.place.an.order');
 Route::get('/order-confirmation',[CartController::class, 'order_confirmation'])->name('cart.order.confirmation');
 
