@@ -53,7 +53,7 @@
           </div>
           <div class="order-info__item">
             <label>Payment Method</label>
-            <span>{{$order->transaction->mode}}</span>
+            <span>{{ ucfirst($order->transaction->mode ?? 'Not specified') }}</span>
           </div>
         </div>
         <div class="checkout__totals-wrapper">
