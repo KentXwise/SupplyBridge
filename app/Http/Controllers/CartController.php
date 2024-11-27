@@ -13,7 +13,6 @@ use Surfsidemedia\Shoppingcart\Facades\Cart;
 
 
 
-
 class CartController extends Controller
 {
     public function index()
@@ -130,14 +129,32 @@ class CartController extends Controller
         $orderItem->save(); 
         
      }
-     if($request->mode=="card" || $request->mode=="paypal" || $request->mode=="cod")
+     if($request-> mode == "card")
+     { 
+        $transaction = new Transaction();
+        $transaction-> user_id = $user_id;
+        $transaction-> order_id = $order->id;
+        $transaction-> mode = $request->mode;
+        $transaction-> status = "pending";
+        $transaction-> save();
+     }
+     elseif($request-> mode == "paypal")
      {
-         $transaction = new Transaction();
-         $transaction->user_id = $user_id;
-         $transaction->order_id = $order->id;
-         $transaction->mode = $request->mode;
-         $transaction->status = "pending";
-         $transaction->save();
+     $transaction = new Transaction();
+     $transaction-> user_id = $user_id;
+     $transaction-> order_id = $order->id;
+     $transaction-> mode = $request->mode;
+     $transaction-> status = "pending";
+     $transaction-> save();
+     }
+     elseif($request-> mode == "cod")
+     {
+     $transaction = new Transaction();
+     $transaction-> user_id = $user_id;
+     $transaction-> order_id = $order->id;
+     $transaction-> mode = $request->mode;
+     $transaction-> status = "pending";
+     $transaction-> save();
      }
 
      Cart::instance('cart')->destroy();
@@ -146,6 +163,52 @@ class CartController extends Controller
      return redirect()->route('cart.order.confirmation');
 
     }
+
+    public function edit_shipping()
+    {
+        if(!Auth::check())
+        {
+            return redirect()->route('login');
+        }
+
+        $address = Address::where('user_id',Auth::user()->id)->where('isdefault',1)->first();
+        return view('checkout-edit',compact('address'));
+    }
+
+    public function update_shipping(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:100',
+            'phone' => 'required|numeric|digits:11',
+            'zip' => 'required|numeric|digits:6',
+            'state' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'locality' => 'required',
+            'landmark' => 'required',
+        ]);
+
+        $address = Address::where('user_id',Auth::user()->id)->where('isdefault',1)->first();
+        if(!$address) {
+            $address = new Address();
+            $address->user_id = Auth::user()->id;
+            $address->isdefault = true;
+        }
+
+        $address->name = $request->name;
+        $address->phone = $request->phone;
+        $address->zip = $request->zip;
+        $address->state = $request->state;
+        $address->city = $request->city;
+        $address->address = $request->address;
+        $address->locality = $request->locality;
+        $address->landmark = $request->landmark;
+        $address->country = 'Philippines';
+        $address->save();
+
+        return redirect()->route('cart.checkout')->with('success','Shipping details updated successfully');
+    }
+
    public function setAmountforCheckout()
    {
       if(!Cart::instance('cart')->content()->count() > 0)

@@ -46,11 +46,14 @@
                                 <div class="my-account__address-item__detail">
                                     <p>{{$address->name}}</p>
                                     <p>{{$address->address}}</p>
+                                    <p>{{$address->locality}}</p>
                                     <p>{{$address->landmark}}</p>
                                     <p>{{$address->city}}, {{$address->state}}, {{$address->country}}</p>
                                     <p>{{$address->zip}}</p>
-                                    <br>
                                     <p>{{$address->phone}}</p>
+                                    <p class="mt-3">
+                                        <a href="{{route('cart.shipping.edit')}}" class="btn btn-secondary">Edit Shipping Details</a>
+                                    </p>
                                 </div>
                             </div>
                         </div> 
