@@ -13,7 +13,6 @@ use Surfsidemedia\Shoppingcart\Facades\Cart;
 
 
 
-
 class CartController extends Controller
 {
     public function index()
@@ -131,12 +130,22 @@ class CartController extends Controller
         
      }
      if($request-> mode == "card")
-     {
-         //
+     { 
+        $transaction = new Transaction();
+        $transaction-> user_id = $user_id;
+        $transaction-> order_id = $order->id;
+        $transaction-> mode = $request->mode;
+        $transaction-> status = "pending";
+        $transaction-> save();
      }
      elseif($request-> mode == "paypal")
      {
-         //
+     $transaction = new Transaction();
+     $transaction-> user_id = $user_id;
+     $transaction-> order_id = $order->id;
+     $transaction-> mode = $request->mode;
+     $transaction-> status = "pending";
+     $transaction-> save();
      }
      elseif($request-> mode == "cod")
      {
