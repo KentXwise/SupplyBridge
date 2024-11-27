@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content')
+@section('content')  
 <main class="pt-90">
     <div class="mb-4 pb-4"></div>
     <section class="shop-checkout container">
@@ -27,7 +27,8 @@
           </span>
         </a>
       </div>
-      <form name="checkout-form" action="">
+      <form name="checkout-form" action="{{route('cart.place.an.order')}}" method="POST">
+        @csrf
         <div class="checkout-form">
           <div class="billing-info__wrapper">
             <div class="row">
@@ -45,11 +46,14 @@
                                 <div class="my-account__address-item__detail">
                                     <p>{{$address->name}}</p>
                                     <p>{{$address->address}}</p>
+                                    <p>{{$address->locality}}</p>
                                     <p>{{$address->landmark}}</p>
                                     <p>{{$address->city}}, {{$address->state}}, {{$address->country}}</p>
                                     <p>{{$address->zip}}</p>
-                                    <br>
                                     <p>{{$address->phone}}</p>
+                                    <p class="mt-3">
+                                        <a href="{{route('cart.shipping.edit')}}" class="btn btn-secondary">Edit Shipping Details</a>
+                                    </p>
                                 </div>
                             </div>
                         </div> 
@@ -60,44 +64,44 @@
             <div class="row mt-5">
               <div class="col-md-6">
                 <div class="form-floating my-3">
-                  <input type="text" class="form-control" name="name" required="" value="{{Old('name')}}">
+                  <input type="text" class="form-control" name="name" required="" value="{{old('name')}}">
                   <label for="name">Full Name *</label>
                   @error('name') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-floating my-3">
-                  <input type="text" class="form-control" name="phone" required="" value="{{Old('phone')}}">
+                  <input type="text" class="form-control" name="phone" required="" value="{{old('phone')}}">
                   <label for="phone">Phone Number *</label>
                   @error('phone') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-floating my-3">
-                  <input type="text" class="form-control" name="zip" required="" value="{{Old('zip')}}">
+                  <input type="text" class="form-control" name="zip" require="" value="{{old('zip')}}">
                   <label for="zip">Pincode *</label>
-                  @error('zip') <span class="text-danger">{{$message}}</span> @enderror>
+                  @error('zip') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-floating mt-3 mb-3">
-                  <input type="text" class="form-control" name="state" required="" value="{{Old('state')}}">
+                  <input type="text" class="form-control" name="state" required="" value="{{old('state')}}">
                   <label for="state">State *</label>
                   @error('state') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-floating my-3">
-                  <input type="text" class="form-control" name="city" required="" value="{{Old('city')}}">
+                  <input type="text" class="form-control" name="city" required="" value="{{old('city')}}">
                   <label for="city">Town / City *</label>
                   @error('city') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-floating my-3">
-                  <input type="text" class="form-control" name="address" required="" value="{{Old('address')}}">
+                  <input type="text" class="form-control" name="address" required="" value="{{old('address')}}">
                   <label for="address">House no, Building Name *</label>
-                  @error('address') <span class="text-danger">{{$message}}</span> @enderror>
+                  @error('address') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
               </div>
               <div class="col-md-6">
@@ -111,7 +115,7 @@
                 <div class="form-floating my-3">
                   <input type="text" class="form-control" name="landmark" required="" value="{{Old('landmark')}}">
                   <label for="landmark">Landmark *</label>
-                  @error('landmark') <span class="text-danger">{{$message}}</span> @enderror>
+                  @error('landmark') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
               </div>
             </div>
@@ -129,10 +133,10 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach (Cart::instance('cart') as $item)
+                    @foreach (Cart::instance('cart')->content() as $item)
                     <tr>
                       <td>
-                        {{$item->name}} x {{$item->$qty}}
+                        {{$item->name}} x {{$item->qty}}
                       </td>
                       <td align="right">
                         ${{$item->subtotal()}}
@@ -154,61 +158,38 @@
                     </tr>
                     <tr>
                       <th>VAT</th>
-                      <td class="text-right">${{Cart::instance('cart')->total()}}</td>
+                      <td class="text-right">${{Cart::instance('cart')->tax()}}</td>
                     </tr>
                     <tr>
-                      <th>TOTAL</th>
+                       <th>TOTAL</th>
                       <td class="text-right">${{Cart::instance('cart')->total()}}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
               <div class="checkout__payment-methods">
+               
                 <div class="form-check">
-                  <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                    id="checkout_payment_method_1" checked>
-                  <label class="form-check-label" for="checkout_payment_method_1">
-                    Direct bank transfer
-                    <p class="option-detail">
-                      Make your payment directly into our bank account. Please use your Order ID as the payment
-                      reference.Your order will not be shipped until the funds have cleared in our account.
-                    </p>
+                  <input class="form-check-input form-check-input_fill" type="radio" name="mode" id="mode1" value="card">
+                  <label class="form-check-label" for="mode1">
+                    Debit or Credit Card
+                   
                   </label>
                 </div>
+
                 <div class="form-check">
-                  <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                    id="checkout_payment_method_2">
-                  <label class="form-check-label" for="checkout_payment_method_2">
-                    Check payments
-                    <p class="option-detail">
-                      Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                      aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra nunc, ut aliquet
-                      magna posuere eget.
-                    </p>
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                    id="checkout_payment_method_3">
-                  <label class="form-check-label" for="checkout_payment_method_3">
-                    Cash on delivery
-                    <p class="option-detail">
-                      Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                      aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra nunc, ut aliquet
-                      magna posuere eget.
-                    </p>
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                    id="checkout_payment_method_4">
-                  <label class="form-check-label" for="checkout_payment_method_4">
+                  <input class="form-check-input form-check-input_fill" type="radio" name="mode" id="mode2" value="paypal">
+                  <label class="form-check-label" for="mode2">
                     Paypal
-                    <p class="option-detail">
-                      Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                      aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra nunc, ut aliquet
-                      magna posuere eget.
-                    </p>
+                   
+                  </label>
+                </div>
+
+                <div class="form-check">
+                  <input class="form-check-input form-check-input_fill" type="radio" name="mode" id="mode3" value="cod">
+                  <label class="form-check-label" for="mode3">
+                    Cash on delivery
+                   
                   </label>
                 </div>
                 <div class="policy-text">

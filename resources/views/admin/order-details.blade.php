@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 @section('content')
 <style>
-                            .table-transaction>tbody>tr:nth-of-type(odd) {
-                                --bs-table-accent-bg: #fff !important;
-                            }
-                        </style>
+    .table-transaction>tbody>tr:nth-of-type(odd){
+        --bs-table-accent-bg:#fff !important;
+    }
+</style>
                         <div class="main-content-inner">
                             <div class="main-content-wrap">
                                 <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                                    <h3>Order Details</h3>
+                                    <h3>Update Order Status</h3>
                                     <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                                         <li>
                                             <a href="{{route('admin.index')}}">
@@ -17,9 +17,10 @@
                                         </li>
                                         <li>
                                             <i class="icon-chevron-right"></i>
-                                        </li>
+                                        </li> 
                                         <li>
-                                            <div class="text-tiny">Order Details</div>
+                                            <div class="text-tiny"> Order Details</div>
+                                        </li>      
                                         </li>
                                     </ul>
                                 </div>
@@ -28,15 +29,18 @@
                                     <div class="flex items-center justify-between gap10 flex-wrap">
                                     <div class="row">
                                     <div class="col-6">
-                                    <h5>Ordered Items</h5>
+                                    <h5>Ordered Details</h5>
                                         
                                         </div>
                                         <div class="col-6 text-right">
-                                        <a class="btn btn-sm btn-danger" href="{{route('user.orders')}}">Back</a>
+                                        <a class="btn btn-sm btn-danger" href="{{route('admin.orders')}}">Back</a>
                                         </div>
                                     </div>
                                     </div>
                                     <div class="table-responsive">
+                                        @if(Session::has('status'))
+                                        <p class="alert alert-success">{{Session::get('status')}}</p>
+                                        @endif
                                         <table class="table  table-bordered">
                                             <tr>
                                             <th>Order No.</th> 
@@ -58,7 +62,7 @@
                                            <tr>
                                             <th>Order Status</th>
                                             <td colspan="5">
-                                                @if($oder->status == 'delivered')
+                                                 @if($order->status == 'delivered')
                                                 <span class="badge bg-success">Delivered</span>
                                                 @elseif($order->status == 'canceled')
                                                 <span class="badge bg-danger">Cancelled</span>
@@ -176,16 +180,30 @@
                                                     @endif
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <th>Order Date</th>
-                                                <td>2024-07-11 00:54:14</td>
-                                                <th>Delivered Date</th>
-                                                <td></td>
-                                                <th>Canceled Date</th>
-                                                <td></td>
-                                            </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="wg-box mt-5">
+                                    <h5>Update Order Status</h5>
+                                  <form action="{{route('admin.order.update.status')}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="order_Id" value="{{$order->id}}">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="select">
+                                            <select name="order_status" id="order_status">
+                                                <option value="ordered" {{$order->status === 'ordered' ? "selected":""}}>Ordered</option>
+                                                <option value="delivered" {{$order->status === 'delivered' ? "selected":""}}>Delivered</option>
+                                                <option value="canceled"{{$order->status === 'canceled' ? "selected":""}}>Cancelled</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <div class="cold-md-3">
+                                            <button type="submit" class="btn btn-primary tf-button w208">Update Status</button>
+                                        </div>
+                                    </div>
+                                  </form>   
                                 </div>
                             </div>
                         </div>

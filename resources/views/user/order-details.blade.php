@@ -111,10 +111,15 @@
 
             <div class="wg-box">
                                     <div class="flex items-center justify-between gap10 flex-wrap">
-                                        <div class="wg-filter flex-grow">
-                                            <h5>Ordered Items</h5>
+                                        <div class="row">
+                                            <div class="col-6">
+                                            <h5>Ordered Details</h5>
+                                            </div>
                                         </div>
-                                        <a class="tf-button style-1 w208" href="{{route('admin.orders')}}">Back</a>
+                                        <div class="col-6 text-right">
+                                        <a class="tf-button style-1 w208" href="{{route('user.orders')}}">Back</a>
+                                        </div>
+                                        
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered">
@@ -138,12 +143,13 @@
                                            <tr>
                                             <th>Order Status</th>
                                             <td colspan="5">
-                                                @if($oder->status == 'delivered')
-                                                <span class="badge bg-success">Delivered</span>
-                                                @elseif($order->status == 'canceled')
-                                                <span class="badge bg-danger">Cancelled</span>
-                                                @else
-                                                <span class="badge bg-warning">Ordered</span>
+                                              @if ($order->status == 'delivered')
+                                              <span class="badge bg-success">Delivered</span>
+                                              @elseif($order->status == 'canceled')
+                                              <span class="badge bg-danger">Cancelled</span>
+                                              @else
+                                              <span class="badge bg-warning">Ordered</span>
+                                              @endif
                                             </td>
 
                                            </tr>
@@ -178,20 +184,21 @@
 
                                                     <td class="pname">
                                                         <div class="image">
-                                                            <img src="{{asset('uploads/products/thumbnails')}}/{{$item->product->image}}" alt="" class="image">
+                                                            <img src="{{ asset('uploads/products/thumbnails/' . ($item->product->image ?? 'default.png')) }}" alt="" class="image">
                                                         </div>
                                                         <div class="name">
-                                                            <a href="{{route('shop.product.details',['product_slug' =>$item->product->slug])}}" target="_blank"
-                                                                class="body-title-2">{{$item->product->name}}</a>
+                                                            <a href="{{ route('shop.product.details', ['product_slug' => $item->product->slug ?? '#']) }}" target="_blank" class="body-title-2">
+                                                                {{ $item->product->name ?? 'N/A' }}
+                                                            </a>
                                                         </div>
                                                     </td>
-                                                    <td class="text-center">{{$item->price}}</td>
-                                                    <td class="text-center">{{$item->quantity}}</td>
-                                                    <td class="text-center">{{$item->product->SKU}}</td>
-                                                    <td class="text-center">{{$item->product->category->name}}</td>
-                                                    <td class="text-center">{{$item->brand->name}}</td>
-                                                    <td class="text-center">{{$item->options}}</td>
-                                                    <td class="text-center">{{$item->rstatus == 0 ? "No" : "Yes"}}</td>
+                                                    <td class="text-center">{{ $item->price }}</td>
+                                                    <td class="text-center">{{ $item->quantity }}</td>
+                                                    <td class="text-center">{{ $item->product->SKU ?? 'N/A' }}</td>
+                                                    <td class="text-center">{{ $item->product->category->name ?? 'N/A' }}</td>
+                                                    <td class="text-center">{{ $item->brand->name ?? 'N/A' }}</td>
+                                                    <td class="text-center">{{ $item->options }}</td>
+                                                    <td class="text-center">{{ $item->rstatus == 0 ? "No" : "Yes" }}</td>
                                                     <td class="text-center">No</td>
                                                     <td class="text-center">
                                                         <div class="list-icon-function view-icon">
@@ -256,17 +263,11 @@
                                                     @endif
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <th>Order Date</th>
-                                                <td>2024-07-11 00:54:14</td>
-                                                <th>Delivered Date</th>
-                                                <td></td>
-                                                <th>Canceled Date</th>
-                                                <td></td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
+
+                             
             </div>
             
         </div>

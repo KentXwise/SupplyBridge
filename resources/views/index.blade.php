@@ -146,7 +146,7 @@
                             <img loading="lazy" class="w-100 h-auto mb-3" src="{{asset('assets/images/home/demo3/supplybridge/c_frozen.png')}}" width="124"
                                 height="124" alt="" />
                             <div class="text-center">
-                                <a href="#" class="menu-link fw-medium">Frozen<br />Foods</a>
+                                <a href="#" class="menu-link fw-medium">Frozen<br/>Foods</a>
                             </div>
                         </div>
                         <div class="swiper-slide">
