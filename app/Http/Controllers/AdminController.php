@@ -14,6 +14,7 @@ use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
+use App\Models\Contact;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -507,5 +508,14 @@ public function delete_brand($id)
        $transaction->save();
    }
 return back()->with('status','Status changed successfully');
+  }
+  public function contacts(){
+    $contacts = Contact::orderBy('id', 'DESC')->paginate(10);
+    return view('admin.contacts', compact('contacts'));
+  }
+  public function contact_delete($id){
+    $contact = Contact::find($id);
+    $contact->delete();
+    return redirect()->route('admin.contacts')->with('status','Contact has been deleted successfully');
   }
 }
