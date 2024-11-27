@@ -98,6 +98,8 @@
     }
   </style>
 
+
+
 <main class="pt-90" style="padding-top: 0px;">
     <div class="mb-4 pb-4"></div>
     <section class="my-account container">
@@ -115,14 +117,14 @@
                                             <div class="col-6">
                                             <h5>Ordered Details</h5>
                                             </div>
-                                        </div>
+                                       
                                         <div class="col-6 text-right">
-                                        <a class="tf-button style-1 w208" href="{{route('user.orders')}}">Back</a>
+                                        <a class="btn btn-sm btn-danger" href="{{route('user.orders')}}">Back</a>
                                         </div>
-                                        
+                                        </div>
                                     </div>
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-bordered">
+                                        <table class="table table-bordered table-striped table-transaction">
                                             <tr>
                                             <th>Order No.</th> 
                                            <td>{{$order->id}}</td>
@@ -269,8 +271,40 @@
 
                              
             </div>
-            
+            <!-- Update the form and button section -->
+<div class="wg-box mt-5 text-right">
+    <form action="{{route('user.order.cancel')}}" method="POST" id="cancelOrderForm">
+        @csrf
+        @method('PUT')
+        <input type="hidden" name="order_id" value="{{$order->id}}">
+        <!-- Added cancel-order class to match jQuery selector -->
+        <button type="button" class="btn btn-danger cancel-order">Cancel Order</button>
+    </form>
+</div>
+
         </div>
     </section>
 </main>
 @endsection
+@push('scripts')
+<script>
+$('.cancel-order').on('click', function(e) {
+    e.preventDefault();
+    const form = $(this).closest('form');
+    
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You want to cancel this order? This action cannot be undone!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, cancel it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.submit();
+        }
+    });
+});
+</script>
+@endpush

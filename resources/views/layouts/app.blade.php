@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')}}"
         integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.min.css')}}">
     @stack('styles')
 </head>
 
@@ -658,6 +659,7 @@
     <script src="{{asset('assets/js/plugins/bootstrap-slider.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/swiper.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/countdown.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function(){
             $('#search-input').on('keyup', function(){
