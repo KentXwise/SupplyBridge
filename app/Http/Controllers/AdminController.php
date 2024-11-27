@@ -471,4 +471,9 @@ return back()->with('status','Status changed successfully');
     $contact->delete();
     return redirect()->route('admin.contacts')->with('status','Contact has been deleted successfully');
   }
+  public function search (Request $request){
+    $query = $request->input('query');
+    $results = Product::where('name', 'like', "%{$query}%")->get()->take(8);
+    return response()->json($results);
+  }
 }
