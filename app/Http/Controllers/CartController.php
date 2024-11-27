@@ -130,22 +130,14 @@ class CartController extends Controller
         $orderItem->save(); 
         
      }
-     if($request->mode=="card")
+     if($request->mode=="card" || $request->mode=="paypal" || $request->mode=="cod")
      {
-         //
-     }
-     elseif($request->mode=="paypal")
-     {
-         //
-     }
-     elseif($request->mode =="cod")
-     {
-     $transaction = new Transaction();
-     $transaction-> user_id = $user_id;
-     $transaction-> order_id = $order->id;
-     $transaction-> mode = $request->mode;
-     $transaction-> status = "pending";
-     $transaction-> save();
+         $transaction = new Transaction();
+         $transaction->user_id = $user_id;
+         $transaction->order_id = $order->id;
+         $transaction->mode = $request->mode;
+         $transaction->status = "pending";
+         $transaction->save();
      }
 
      Cart::instance('cart')->destroy();
