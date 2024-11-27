@@ -14,8 +14,8 @@ use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
-use Illuminate\Support\Facades\DB;
 use App\Models\Contact;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
