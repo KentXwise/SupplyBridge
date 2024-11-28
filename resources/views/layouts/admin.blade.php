@@ -20,8 +20,8 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}">
 <link rel="stylesheet" href="{{ asset('font/fonts.css')}}">
 <link rel="stylesheet" href="{{ asset('icon/style.css')}}">
-<link rel="shortcut icon" href="{{ asset('images/favicon.ico')}}">
-<link rel="apple-touch-icon-precomposed" href="{{ asset('images/favicon.ico')}}">
+<link rel="shortcut icon" href="{{ asset('images/favicon.png')}}">
+<link rel="apple-touch-icon-precomposed" href="{{ asset('images/favicon.png')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css')}}">
     @stack("style")
@@ -41,8 +41,8 @@
                 <div class="section-menu-left">
                     <div class="box-logo">
                         <a href="{{route('home.index')}}" id="site-logo-inner">
-                            <img class="" id="logo_header_1" alt="" src="{{asset('assets/images/logo.png')}}"
-                                data-light="{{ asset('images/logo/logo.png') }}" data-dark="{{ asset('images/logo/logo.png') }}">
+                            <img class="" id="logo_header_1" alt="" src="{{asset('assets/images/adminlogo.png')}}"
+                                data-light="{{ asset('images/logo/adminlogo.png') }}" data-dark="{{ asset('images/logo/adminlogo.png') }}">
                         </a>
                         <div class="button-show-hide">
                             <i class="icon-menu-left"></i>
@@ -214,7 +214,7 @@
       
                         
                         <div class="bottom-page">
-                            <div class="body-text">All Rights Reserved © 2024 SupplyBridge</div>
+                            <div class="body-text">Copyright © 2024 Supply Bridge</div>
                         </div>
                     </div>
 

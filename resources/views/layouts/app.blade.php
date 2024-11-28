@@ -13,7 +13,7 @@
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="surfside media" />
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico" type="image/x-icon')}}">
+    <link rel="shortcut icon" href="{{asset('assets/images/favicon.png" type="image/x-icon')}}">
     <link rel="preconnect" href="{{url('https://fonts.gstatic.com/')}}">
     <link
         href="{{url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap')}}"
@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')}}"
         integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.min.css')}}">
     @stack('styles')
 </head>
 
@@ -274,7 +273,7 @@
 
             <div class="logo">
                 <a href="index.html">
-                    <img src="{{asset('assets/images/logo.png')}}" alt="Uomo" class="logo__image d-block" />
+                    <img src="{{asset('assets/images/adminlogo.png')}}" alt="Uomo" class="logo__image d-block" />
                 </a>
             </div>
 
@@ -394,7 +393,7 @@
             <div class="header-desk header-desk_type_1">
                 <div class="logo">
                     <a href="{{route('home.index')}}">
-                        <img src="{{asset('assets/images/logo.png')}}" alt="Uomo" class="logo__image d-block" />
+                        <img src="{{asset('assets/images/adminlogo.png')}}" alt="Uomo" class="logo__image d-block" />
                     </a>
                 </div>
 
@@ -659,7 +658,6 @@
     <script src="{{asset('assets/js/plugins/bootstrap-slider.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/swiper.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/countdown.js')}}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function(){
             $('#search-input').on('keyup', function(){

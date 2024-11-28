@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             MonthSeeder::class
-       ]);
+        ]);
         // User::factory(10)->create();
 
         // User::factory()->create([
