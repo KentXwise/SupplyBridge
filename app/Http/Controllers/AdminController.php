@@ -34,6 +34,7 @@ class AdminController extends Controller
                                         FROM orders
                                     ");
         
+        
         $monthlyDatas = DB::select("SELECT M.id AS MonthNo, M.name AS MonthName,
                                             IFNULL(D.TotalAmount, 0) AS TotalAmount,
                                             IFNULL(D.TotalOrderedAmount, 0) AS TotalOrderedAmount,
