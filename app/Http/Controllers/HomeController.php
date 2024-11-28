@@ -15,6 +15,10 @@ class HomeController extends Controller
     {
         return view('user.contact');
     }
+    public function about()
+    {
+        return view('about');
+    }
     public function contact_store(Request $request)
     {
         $request->validate([
