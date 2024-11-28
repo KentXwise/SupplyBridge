@@ -13,7 +13,7 @@
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="surfside media" />
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico" type="image/x-icon')}}">
+    <link rel="shortcut icon" href="{{asset('assets/images/favicon.png" type="image/x-icon')}}">
     <link rel="preconnect" href="{{url('https://fonts.gstatic.com/')}}">
     <link
         href="{{url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap')}}"
@@ -273,7 +273,7 @@
 
             <div class="logo">
                 <a href="index.html">
-                    <img src="{{asset('assets/images/SupplyBridge Logo.png')}}" alt="Uomo" class="logo__image d-block" />
+                    <img src="{{asset('assets/images/adminlogo.png')}}" alt="Uomo" class="logo__image d-block" />
                 </a>
             </div>
 
@@ -393,7 +393,7 @@
             <div class="header-desk header-desk_type_1">
                 <div class="logo">
                     <a href="{{route('home.index')}}">
-                        <img src="{{asset('assets/images/SupplyBridge Logo.png')}}" alt="Uomo" class="logo__image d-block" />
+                        <img src="{{asset('assets/images/adminlogo.png')}}" alt="Uomo" class="logo__image d-block" />
                     </a>
                 </div>
 
@@ -501,7 +501,7 @@
                 <div class="footer-column footer-store-info col-12 mb-4 mb-lg-0">
                     <div class="logo">
                         <a href="index.html">
-                            <img src="{{asset('assets/images/SupplyBridge Logo.png')}}" alt="SurfsideMedia" class="logo__image d-block" />
+                            <img src="{{asset('assets/images/footerlogo.png')}}" alt="SurfsideMedia" class="logo__image d-block" />
                         </a>
                     </div>
                     <p class="footer-address">8105 Panabo City, Davao del Norte, Philippines</p>

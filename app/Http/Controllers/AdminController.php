@@ -34,6 +34,7 @@ class AdminController extends Controller
                                         FROM orders
                                     ");
         
+        
         $monthlyDatas = DB::select("SELECT M.id AS MonthNo, M.name AS MonthName,
                                             IFNULL(D.TotalAmount, 0) AS TotalAmount,
                                             IFNULL(D.TotalOrderedAmount, 0) AS TotalOrderedAmount,
@@ -493,22 +494,26 @@ public function delete_brand($id)
     return view('admin.order-details', compact('order', 'orderItems', 'transaction'));
   }
   public function update_order_details(Request $request){
-    $order = Order::find($request->order_id);
+    $order = Order::find($request->order_Id);
+    if (!$order) {
+        return back()->with('error', 'Order not found.');
+    }
     $order->status = $request->order_status;
-   if($request->order_status == 'delivered'){
-       $order->delivered_date = Carbon::now();
-   }elseif($request->order_status == 'canceled'){
-       $order->canceled_date=Carbon::now();
-
-   }
-   $order->save();
-   if($request->order_status == 'delivered'){
-       $transaction=Transaction::where('order_id',$request->order_id)->first();
-       $transaction->status = 'approved';
-       $transaction->save();
-   }
-return back()->with('status','Status changed successfully');
-  }
+    if($request->order_status == 'delivered'){
+        $order->delivered_date = Carbon::now();
+    }elseif($request->order_status == 'canceled'){
+        $order->canceled_date = Carbon::now();
+    }
+    $order->save();
+    if($request->order_status == 'delivered'){
+        $transaction = Transaction::where('order_id', $request->order_Id)->first();
+        if ($transaction) {
+            $transaction->status = 'approved';
+            $transaction->save();
+        }
+    }
+    return back()->with('status', 'Status changed successfully');
+}
   public function contacts(){
     $contacts = Contact::orderBy('id', 'DESC')->paginate(10);
     return view('admin.contacts', compact('contacts'));
