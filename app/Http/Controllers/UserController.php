@@ -41,4 +41,9 @@ class UserController extends Controller
     
         return redirect()->route('user.orders')->with('success', 'Order canceled successfully.');
     }
+
+    public function account_details(Request $request)
+    {
+
+    }
 }

@@ -212,11 +212,6 @@
               href="#tab-description" role="tab" aria-controls="tab-description" aria-selected="true">Description</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link nav-link_underscore" id="tab-additional-info-tab" data-bs-toggle="tab"
-              href="#tab-additional-info" role="tab" aria-controls="tab-additional-info"
-              aria-selected="false">Additional Information</a>
-          </li>
-          <li class="nav-item" role="presentation">
             <a class="nav-link nav-link_underscore" id="tab-reviews-tab" data-bs-toggle="tab" href="#tab-reviews"
               role="tab" aria-controls="tab-reviews" aria-selected="false">Reviews (2)</a>
           </li>
