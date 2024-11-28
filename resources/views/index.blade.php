@@ -14,7 +14,7 @@
             <div class="swiper-slide">
                 <div class="overflow-hidden position-relative h-100">
                     <div class="slideshow-character position-absolute bottom-0 pos_right-center">
-                        <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/bagdisplay.png')}}" width="542" height="733"
+                        <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/PROMO/3s.png')}}" width="542" height="733"
                             alt="Woman Fashion 1"
                             class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto" />
                         <div class="character_markup type2">
@@ -38,7 +38,7 @@
             <div class="swiper-slide">
                 <div class="overflow-hidden position-relative h-100">
                     <div class="slideshow-character position-absolute bottom-0 pos_right-center">
-                        <img loading="lazy" src="{{asset('assets/images//home/demo3/supplybridge/displaycenturyy.jpg')}}" width="400" height="733"
+                        <img loading="lazy" src="{{asset('assets/images//home/demo3/supplybridge/PROMO/5s.png')}}" width="400" height="733"
                             alt="Woman Fashion 1"
                             class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto" />
                         <div class="character_markup">
@@ -61,7 +61,7 @@
             <div class="swiper-slide">
                 <div class="overflow-hidden position-relative h-100">
                     <div class="slideshow-character position-absolute bottom-0 pos_right-center">
-                        <img loading="lazy" src="{{asset('assets/images//home/demo3/supplybridge/displayyema.png')}}" width="400" height="690"
+                        <img loading="lazy" src="{{asset('assets/images//home/demo3/supplybridge/PROMO/7s.png')}}" width="400" height="690"
                             alt="Woman Fashion 2"
                             class="slideshow-character__img animate animate_fade animate_rtl animate_delay-10 w-auto h-auto" />
                     </div>
@@ -276,9 +276,9 @@
                                 <div class="swiper-slide product-card product-card_style3">
                                     <div class="pc__img-wrapper">
                                         <a href="details.html">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/bananachip.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/udonplanter.jpg')}}" width="258" height="313"
                                                 alt="Banana Chips" class="pc__img">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/bananachipl.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/udonplanter1.jpg')}}" width="258" height="313"
                                                 alt="Banana Chips" class="pc__img pc__img-second">
                                         </a>
                                     </div>
@@ -313,9 +313,9 @@
                                 <div class="swiper-slide product-card product-card_style3">
                                     <div class="pc__img-wrapper">
                                         <a href="details.html">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/abacabag.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/abacabag.jpg')}}" width="258" height="313"
                                                 alt="Abaca Bag" class="pc__img">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/abacabagl.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/abacabagl.jpg')}}" width="258" height="313"
                                                 alt="Abaca Bag" class="pc__img pc__img-second">
                                         </a>
                                     </div>
@@ -350,9 +350,9 @@
                                 <div class="swiper-slide product-card product-card_style3">
                                     <div class="pc__img-wrapper">
                                         <a href="details.html">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/cocoa.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/mm.jpg')}}" width="258" height="313"
                                                 alt="Premuim Tablea" class="pc__img">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/cocoal.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/mm1.jpg')}}" width="258" height="313"
                                                 alt="Premuim Tablea" class="pc__img pc__img-second">
                                         </a>
                                     </div>
@@ -387,9 +387,9 @@
                                 <div class="swiper-slide product-card product-card_style3">
                                     <div class="pc__img-wrapper">
                                         <a href="details.html">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/bagoong.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/choco.jpg')}}" width="258" height="313"
                                                 alt="Bagoong Alamang" class="pc__img">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/bagoongl.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/choco1.jpg')}}" width="258" height="313"
                                                 alt="Bagoong Alamang" class="pc__img pc__img-second">
                                         </a>
                                     </div>
@@ -425,9 +425,9 @@
                                 <div class="swiper-slide product-card product-card_style3">
                                     <div class="pc__img-wrapper">
                                         <a href="details.html">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/bananachip.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/udonplanter.jpg')}}" width="258" height="313"
                                                 alt="Banana Chips" class="pc__img">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/bananachipl.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/udonplanter1.jpg')}}" width="258" height="313"
                                                 alt="Banana Chips" class="pc__img pc__img-second">
                                         </a>
                                     </div>
@@ -462,9 +462,9 @@
                                 <div class="swiper-slide product-card product-card_style3">
                                     <div class="pc__img-wrapper">
                                         <a href="details.html">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/abacabag.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/abacabag.jpg')}}" width="258" height="313"
                                                 alt="Abaca Bag" class="pc__img">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/abacabagl.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/abacabagl.jpg')}}" width="258" height="313"
                                                 alt="Abaca Bag" class="pc__img pc__img-second">
                                         </a>
                                     </div>
@@ -499,9 +499,9 @@
                                 <div class="swiper-slide product-card product-card_style3">
                                     <div class="pc__img-wrapper">
                                         <a href="details.html">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/cocoa.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/mm.jpg')}}" width="258" height="313"
                                                 alt="Premuim Tablea" class="pc__img">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/cocoal.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/mm1.jpg')}}" width="258" height="313"
                                                 alt="Premuim Tablea" class="pc__img pc__img-second">
                                         </a>
                                     </div>
@@ -536,9 +536,9 @@
                                 <div class="swiper-slide product-card product-card_style3">
                                     <div class="pc__img-wrapper">
                                         <a href="details.html">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/bagoong.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/choco.jpg')}}" width="258" height="313"
                                                 alt="Bagoong Alamang" class="pc__img">
-                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/bagoongl.jpg')}}" width="258" height="313"
+                                            <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/hotdeals/choco1.jpg')}}" width="258" height="313"
                                                 alt="Bagoong Alamang" class="pc__img pc__img-second">
                                         </a>
                                     </div>
@@ -597,7 +597,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="category-banner__item border-radius-10 mb-5">
-                        <img loading="lazy" class="h-auto" src="{{asset('assets/images/home/demo3/supplybridge/drinkk.png')}}" width="690" height="665"
+                        <img loading="lazy" class="h-auto" src="{{asset('assets/images/home/demo3/supplybridge/driedmango.png')}}" width="690" height="665"
                             alt="" />
                         <div class="category-banner__item-mark">
                             Starting at ₱20
@@ -840,7 +840,7 @@
                     <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
                         <div class="pc__img-wrapper">
                             <a href="details.html">
-                                <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/tocino.jpg')}}" width="330" height="400"
+                                <img loading="lazy" src="{{asset('assets/images/home/demo3/supplybridge/candlehandler.jpg')}}" width="330" height="400"
                                     alt="Mang Thomas" class="pc__img">
                             </a>
                         </div>

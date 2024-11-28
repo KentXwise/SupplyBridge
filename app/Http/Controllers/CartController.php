@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Surfsidemedia\Shoppingcart\Facades\Cart;
 
+
+
 class CartController extends Controller
 {
     public function index()
@@ -47,5 +49,6 @@ class CartController extends Controller
         Cart::instance('cart')->destroy();
         return redirect()->back();
     }
+
 
 }

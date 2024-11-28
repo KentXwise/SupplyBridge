@@ -2740,7 +2740,7 @@ a:hover, a:focus {
   right: 0;
   border-radius: 14px;
   padding: 16px;
-  background-color: var(--White);
+  background-color: #67a0ce;
   box-shadow: 0px 4px 24px 2px rgba(20, 25, 38, 0.05);
   height: 538px;
   overflow-y: scroll;
@@ -3555,7 +3555,7 @@ select.h40 {
   left: 0;
   overflow-y: auto;
   z-index: 20;
-  background-color: #fff;
+  background-color: #fd6937;
   box-shadow: 0px 0px 24px 2px rgba(20, 25, 38, 0.05);
   padding-top: 81px;
   display: -webkit-box;
@@ -3583,8 +3583,8 @@ select.h40 {
   z-index: 30;
   padding: 14px 20px 13px 20px;
   width: 280px;
-  background-color: #fff;
-  border-bottom: 1px solid #F2F7FB;
+  background-color: #fd6937;
+  border-bottom: 1px solid #fd6937;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -3603,7 +3603,7 @@ select.h40 {
   width: 100%;
 }
 .layout-wrap .section-menu-left > .center .center-heading {
-  color: #BDC7D3;
+  color: #ffffff;
   font-size: 12px;
   font-weight: 700;
   line-height: 15px;
@@ -3715,7 +3715,7 @@ select.h40 {
   position: relative;
 }
 .layout-wrap .section-menu-left > .center .center-item .menu-list .menu-item.has-children .sub-menu a .text {
-  color: #575864;
+  color: #ffffff;
 }
 .layout-wrap .section-menu-left > .center .center-item .menu-list .menu-item.has-children .sub-menu a::before {
   position: absolute;
@@ -3766,7 +3766,7 @@ select.h40 {
 .layout-wrap .section-menu-left .button-show-hide {
   position: relative;
   font-size: 24px;
-  color: #94A3B8;
+  color: #ffffff;
   cursor: pointer;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;

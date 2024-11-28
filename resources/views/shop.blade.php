@@ -29,35 +29,35 @@
               <div class="accordion-body px-0 pb-0 pt-3">
                 <ul class="list list-inline mb-0">
                   <li class="list-item">
-                    <a href="#" class="menu-link py-1">Dresses</a>
+                    <a href="#" class="menu-link py-1">Beverages</a>
                   </li>
                   <li class="list-item">
-                    <a href="#" class="menu-link py-1">Shorts</a>
+                    <a href="#" class="menu-link py-1">Canned Goods</a>
                   </li>
                   <li class="list-item">
-                    <a href="#" class="menu-link py-1">Sweatshirts</a>
+                    <a href="#" class="menu-link py-1">Condiments</a>
                   </li>
                   <li class="list-item">
-                    <a href="#" class="menu-link py-1">Swimwear</a>
+                    <a href="#" class="menu-link py-1">Dairy Products</a>
                   </li>
                   <li class="list-item">
-                    <a href="#" class="menu-link py-1">Jackets</a>
+                    <a href="#" class="menu-link py-1">Frozen Foods</a>
                   </li>
                   <li class="list-item">
-                    <a href="#" class="menu-link py-1">T-Shirts & Tops</a>
+                    <a href="#" class="menu-link py-1">Beauty Essentials</a>
                   </li>
                   <li class="list-item">
-                    <a href="#" class="menu-link py-1">Jeans</a>
+                    <a href="#" class="menu-link py-1">Supplements</a>
                   </li>
                   <li class="list-item">
-                    <a href="#" class="menu-link py-1">Trousers</a>
+                    <a href="#" class="menu-link py-1">Crafts & Decors</a>
                   </li>
-                  <li class="list-item">
+                  <!-- <li class="list-item">
                     <a href="#" class="menu-link py-1">Men</a>
                   </li>
                   <li class="list-item">
                     <a href="#" class="menu-link py-1">Jumpers & Cardigans</a>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
             </div>
@@ -65,7 +65,7 @@
         </div>
 
 
-        <div class="accordion" id="color-filters">
+        <!-- <div class="accordion" id="color-filters">
           <div class="accordion-item mb-4 pb-3">
             <h5 class="accordion-header" id="accordion-heading-1">
               <button class="accordion-button p-0 border-0 fs-5 text-uppercase" type="button" data-bs-toggle="collapse"
@@ -97,10 +97,10 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
 
-        <div class="accordion" id="size-filters">
+        <!-- <div class="accordion" id="size-filters">
           <div class="accordion-item mb-4 pb-3">
             <h5 class="accordion-header" id="accordion-heading-size">
               <button class="accordion-button p-0 border-0 fs-5 text-uppercase" type="button" data-bs-toggle="collapse"
@@ -128,7 +128,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
 
         <div class="accordion" id="brand-filters">
@@ -219,18 +219,18 @@
             <div class="swiper-slide">
               <div class="slide-split h-100 d-block d-md-flex overflow-hidden">
                 <div class="slide-split_text position-relative d-flex align-items-center"
-                  style="background-color: #f5e6e0;">
+                  style="background-color: #d1e4ea;">
                   <div class="slideshow-text container p-3 p-xl-5">
                     <h2
                       class="text-uppercase section-title fw-normal mb-3 animate animate_fade animate_btt animate_delay-2">
-                      Women's <br /><strong>ACCESSORIES</strong></h2>
-                    <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Accessories are the best way to
-                      update your look. Add a title edge with new styles and new colors, or go for timeless pieces.</h6>
+                      SUPPLY  <br /><strong>BRIDGE</strong></h2>
+                    <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Empower your business with ease—our online platform connects retailers to quality goods at unbeatable bundle deals. 
+                      Discover new styles, stock up on essentials, and elevate your offerings with just a few clicks.</h6>
                   </div>
                 </div>
                 <div class="slide-split_media position-relative">
-                  <div class="slideshow-bg" style="background-color: #f5e6e0;">
-                    <img loading="lazy" src="assets/images/shop/shop_banner3.jpg" width="630" height="450"
+                  <div class="slideshow-bg" style="background-color: #d1e4ea;">
+                    <img loading="lazy" src="assets/images/shop/spbanner1.jpg" width="630" height="450"
                       alt="Women's accessories" class="slideshow-bg__img object-fit-cover" />
                   </div>
                 </div>
@@ -240,18 +240,18 @@
             <div class="swiper-slide">
               <div class="slide-split h-100 d-block d-md-flex overflow-hidden">
                 <div class="slide-split_text position-relative d-flex align-items-center"
-                  style="background-color: #f5e6e0;">
+                  style="background-color: #d1e4ea;">
                   <div class="slideshow-text container p-3 p-xl-5">
                     <h2
                       class="text-uppercase section-title fw-normal mb-3 animate animate_fade animate_btt animate_delay-2">
-                      Women's <br /><strong>ACCESSORIES</strong></h2>
-                    <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Accessories are the best way to
-                      update your look. Add a title edge with new styles and new colors, or go for timeless pieces.</h6>
+                      SUPPLY <br /><strong>BRIDGE</strong></h2>
+                    <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Empower your business with ease—our online platform connects retailers to quality goods at unbeatable bundle deals. 
+                      Discover new styles, stock up on essentials, and elevate your offerings with just a few clicks.</h6>
                   </div>
                 </div>
                 <div class="slide-split_media position-relative">
-                  <div class="slideshow-bg" style="background-color: #f5e6e0;">
-                    <img loading="lazy" src="assets/images/shop/shop_banner3.jpg" width="630" height="450"
+                  <div class="slideshow-bg" style="background-color: #d1e4ea;">
+                    <img loading="lazy" src="assets/images/shop/spbanner1.jpg" width="630" height="450"
                       alt="Women's accessories" class="slideshow-bg__img object-fit-cover" />
                   </div>
                 </div>
@@ -261,18 +261,18 @@
             <div class="swiper-slide">
               <div class="slide-split h-100 d-block d-md-flex overflow-hidden">
                 <div class="slide-split_text position-relative d-flex align-items-center"
-                  style="background-color: #f5e6e0;">
+                  style="background-color: #d1e4ea;">
                   <div class="slideshow-text container p-3 p-xl-5">
                     <h2
                       class="text-uppercase section-title fw-normal mb-3 animate animate_fade animate_btt animate_delay-2">
-                      Women's <br /><strong>ACCESSORIES</strong></h2>
-                    <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Accessories are the best way to
-                      update your look. Add a title edge with new styles and new colors, or go for timeless pieces.</h6>
+                      SUPPLY<br /><strong>BRIDGE</strong></h2>
+                    <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Empower your business with ease—our online platform connects retailers to quality goods at unbeatable bundle deals. 
+                      Discover new styles, stock up on essentials, and elevate your offerings with just a few clicks.</h6>
                   </div>
                 </div>
                 <div class="slide-split_media position-relative">
-                  <div class="slideshow-bg" style="background-color: #f5e6e0;">
-                    <img loading="lazy" src="assets/images/shop/shop_banner3.jpg" width="630" height="450"
+                  <div class="slideshow-bg" style="background-color: #d1e4ea;">
+                    <img loading="lazy" src="assets/images/shop/spbanner1.jpg" width="630" height="450"
                       alt="Women's accessories" class="slideshow-bg__img object-fit-cover" />
                   </div>
                 </div>
