@@ -49,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
 Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
 Route::get('/account-order/{order_id}/details', [UserController::class, 'order_details'])->name('user.order.details');
+Route::put('/account-order/cancel-order', [UserController::class, 'order_cancel'])->name('user.order.cancel');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {
@@ -74,7 +75,7 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
    
     Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
     Route::get('/admin/order/{order_id}/details',[AdminController::class,'order_details'])->name('admin.order.details');
-    Route::put('/admin/order/status/update',[AdminController::class,'update_order_status'])->name('admin.order.status.update');
+    Route::put('/admin/order/update-status', [AdminController::class, 'update_order_details'])->name('admin.order.update.status');
     
     Route::get('/admin/contact', [AdminController::class, 'contacts'])->name('admin.contacts');
     Route::delete('/admin/contact/{id}/delete', [AdminController::class, 'contact_delete'])->name('admin.contact.delete');

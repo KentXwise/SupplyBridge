@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\OrderItem;
 use App\Models\Transaction;
 use App\Models\User;
+use Carbon\Carbon;
 
 
 
@@ -31,40 +32,13 @@ class UserController extends Controller
         }
        
     }
-
-    public function address_edit($id)
+    public function order_cancel(Request $request)
     {
-        $address = Address::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
-        return view('address-edit', compact('address'));
-    }
-
-    public function address_update(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|max:100',
-            'phone' => 'required|numeric|digits:11',
-            'zip' => 'required|numeric|digits:6',
-            'state' => 'required',
-            'city' => 'required',
-            'address' => 'required',
-            'locality' => 'required',
-            'landmark' => 'required',
-        ]);
-
-        $address = Address::where('id', $request->id)
-                         ->where('user_id', Auth::id())
-                         ->firstOrFail();
-
-        $address->name = $request->name;
-        $address->phone = $request->phone;
-        $address->zip = $request->zip;
-        $address->state = $request->state;
-        $address->city = $request->city;
-        $address->address = $request->address;
-        $address->locality = $request->locality;
-        $address->landmark = $request->landmark;
-        $address->save();
-
-        return redirect()->route('user.index')->with('success', 'Address updated successfully');
+        $order = Order::find($request->order_id);
+        $order->status = 'canceled';
+        $order->canceled_date = now();
+        $order->save();
+    
+        return redirect()->route('user.orders')->with('success', 'Order canceled successfully.');
     }
 }
