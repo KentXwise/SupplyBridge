@@ -55,7 +55,7 @@
                                             <th>Order Date</th> 
                                            <td>{{$order->created_at}}</td>
                                            <th>Delivered Date</th>
-                                           <td>{{$order->delivred_date}}</td> 
+                                           <td>{{$order->delivered_date}}</td> 
                                            <th>Canceled Date</th>
                                            <td>{{$order->canceled_date}}</td> 
                                            </tr>
@@ -68,6 +68,7 @@
                                                 <span class="badge bg-danger">Cancelled</span>
                                                 @else
                                                 <span class="badge bg-warning">Ordered</span>
+                                                @endif
                                             </td>
 
                                            </tr>
@@ -111,9 +112,9 @@
                                                     </td>
                                                     <td class="text-center">{{$item->price}}</td>
                                                     <td class="text-center">{{$item->quantity}}</td>
-                                                    <td class="text-center">{{$item->product->SKU}}</td>
-                                                    <td class="text-center">{{$item->product->category->name}}</td>
-                                                    <td class="text-center">{{$item->brand->name}}</td>
+                                                    <td class="text-center">{{ $item->product->SKU ?? 'N/A' }}</td>
+                                                    <td class="text-center">{{ $item->product->category->name ?? 'N/A' }}</td>
+                                                    <td class="text-center">{{ $item->brand->name ?? 'N/A' }}</td>
                                                     <td class="text-center">{{$item->options}}</td>
                                                     <td class="text-center">{{$item->rstatus == 0 ? "No" : "Yes"}}</td>
                                                     <td class="text-center">No</td>
@@ -175,6 +176,8 @@
                                                     <span class="badge bg-success">Approved</span>
                                                     @elseif($transaction->status == 'declined')
                                                     <span class="badge bg-danger">Declined</span>
+                                                    @elseif($transaction->status == 'refunded')
+                                                    <span class="badge bg-warning">Refunded</span>
                                                     @else 
                                                     <span class="badge bg-warning">Pending</span>
                                                     @endif
@@ -185,26 +188,23 @@
                                 </div>
                                 <div class="wg-box mt-5">
                                     <h5>Update Order Status</h5>
-                                  <form action="{{route('admin.order.update.status')}}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <input type="hidden" name="order_Id" value="{{$order->id}}">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="select">
-                                            <select name="order_status" id="order_status">
-                                                <option value="ordered" {{$order->status === 'ordered' ? "selected":""}}>Ordered</option>
-                                                <option value="delivered" {{$order->status === 'delivered' ? "selected":""}}>Delivered</option>
-                                                <option value="canceled"{{$order->status === 'canceled' ? "selected":""}}>Cancelled</option>
-                                            </select>
-                                            </div>
-                                        </div>
-                                        <div class="cold-md-3">
-                                            <button type="submit" class="btn btn-primary tf-button w208">Update Status</button>
-                                        </div>
-                                    </div>
-                                  </form>   
-                                </div>
-                            </div>
-                        </div>
+                                    <form action="{{ route('admin.order.update.status') }}" method="POST">
+    @csrf
+    @method('PUT')
+    <input type="hidden" name="order_Id" value="{{ $order->id }}">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="select">
+                <select name="order_status" id="order_status">
+                    <option value="ordered" {{ $order->status == 'ordered' ? "selected" : "" }}>Ordered</option>
+                    <option value="delivered" {{ $order->status == 'delivered' ? "selected" : "" }}>Delivered</option>
+                    <option value="canceled" {{ $order->status == 'canceled' ? "selected" : "" }}>Cancelled</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-primary tf-button w208">Update Status</button>
+        </div>
+    </div>
+</form>
 @endsection

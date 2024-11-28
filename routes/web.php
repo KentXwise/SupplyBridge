@@ -18,7 +18,6 @@ Route::get('/shop',[ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop/{product_slug}',[ShopController::class,'product_details'])->name('shop.product.details');
 
 Route::get('/cart',[CartController::class, 'index'])->name('cart.index');
-
 Route::post('cart/add',[CartController::class, 'add_to_cart'])->name('cart.add');
 Route::put('/cart/increase-quantity/{rowId}',[CartController::class, 'increase_cart_quantity'])->name('cart.qty.increase');
 Route::put('/cart/decrease-quantity/{rowId}',[CartController::class, 'decrease_cart_quantity'])->name('cart.qty.decrease');
@@ -33,8 +32,6 @@ Route::delete('/wishlist/clear', [WishlistController::class, 'empty_wishlist'])-
 
 
 
-<<<<<<< HEAD
-=======
 Route::get('/checkout',[CartController::class, 'checkout'])->name('cart.checkout');
 Route::get('/checkout/edit',[CartController::class, 'edit_shipping'])->name('cart.shipping.edit');
 Route::put('/checkout/update',[CartController::class, 'update_shipping'])->name('cart.shipping.update');
@@ -46,12 +43,12 @@ Route::get('/contact-us', [HomeController::class, 'contact'])->name('home.contac
 Route::post('/contact/store', [HomeController::class, 'contact_store'])->name('home.contact.store');
 
 Route::get('/search', [HomeController::class, 'search'])->name('home.search');
->>>>>>> c0dd6db570ec3ebd651b04be9d34becb95f7e6f4
 
 Route::middleware(['auth'])->group(function () {
 Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
 Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
 Route::get('/account-order/{order_id}/details', [UserController::class, 'order_details'])->name('user.order.details');
+Route::put('/account-order/cancel-order', [UserController::class, 'order_cancel'])->name('user.order.cancel');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {
@@ -77,7 +74,7 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
    
     Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
     Route::get('/admin/order/{order_id}/details',[AdminController::class,'order_details'])->name('admin.order.details');
-    Route::put('/admin/order/status/update',[AdminController::class,'update_order_status'])->name('admin.order.status.update');
+    Route::put('/admin/order/update-status', [AdminController::class, 'update_order_details'])->name('admin.order.update.status');
     
     Route::get('/admin/contact', [AdminController::class, 'contacts'])->name('admin.contacts');
     Route::delete('/admin/contact/{id}/delete', [AdminController::class, 'contact_delete'])->name('admin.contact.delete');
