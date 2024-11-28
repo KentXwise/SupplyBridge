@@ -8,6 +8,7 @@ use App\Http\Middleware\AuthAdmin;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\WishlistController;
 
 
 Auth::routes();
@@ -24,14 +25,33 @@ Route::put('/cart/decrease-quantity/{rowId}',[CartController::class, 'decrease_c
 Route::delete('/cart/remove/{rowId}',[CartController::class, 'remove_item'])->name('cart.item.remove');
 Route::delete('/cart/clear/',[CartController::class, 'empty_cart'])->name('cart.empty');
 
+Route::post('/wishlist/add', [WishlistController::class, 'add_to_wishlist'])->name('wishlist.add');
+Route::get('/wishlist', [WishlistController::class,'index'])->name('wishlist.index');
+Route::delete('/wishlist/item/remove/{rowId}', [WishlistController::class, 'remove_item'])->name('wishlist.item.remove');
+Route::delete('/wishlist/clear', [WishlistController::class, 'empty_wishlist'])->name('wishlist.item.clear');
 
-Route::get('/cart',[CartController::class, 'index'])->name('cart.index');
 
 
 
+<<<<<<< HEAD
+=======
+Route::get('/checkout',[CartController::class, 'checkout'])->name('cart.checkout');
+Route::get('/checkout/edit',[CartController::class, 'edit_shipping'])->name('cart.shipping.edit');
+Route::put('/checkout/update',[CartController::class, 'update_shipping'])->name('cart.shipping.update');
+Route::post('/place-an-order',[CartController::class, 'place_an_order'])->name('cart.place.an.order');
+Route::get('/order-confirmation',[CartController::class, 'order_confirmation'])->name('cart.order.confirmation');
+
+
+Route::get('/contact-us', [HomeController::class, 'contact'])->name('home.contact');
+Route::post('/contact/store', [HomeController::class, 'contact_store'])->name('home.contact.store');
+
+Route::get('/search', [HomeController::class, 'search'])->name('home.search');
+>>>>>>> c0dd6db570ec3ebd651b04be9d34becb95f7e6f4
 
 Route::middleware(['auth'])->group(function () {
 Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
+Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
+Route::get('/account-order/{order_id}/details', [UserController::class, 'order_details'])->name('user.order.details');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {
@@ -54,5 +74,14 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/admin/product/{id}/edit', [AdminController::class, 'product_edit'])->name('admin.product.edit');
     Route::put('/admin/product/update',[AdminController::class, 'product_update'])->name('admin.product.update');
     Route::delete('/admin/product/{id}/delete', [AdminController::class, 'product_detele'])->name('admin.product.delete');
+   
+    Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+    Route::get('/admin/order/{order_id}/details',[AdminController::class,'order_details'])->name('admin.order.details');
+    Route::put('/admin/order/status/update',[AdminController::class,'update_order_status'])->name('admin.order.status.update');
+    
+    Route::get('/admin/contact', [AdminController::class, 'contacts'])->name('admin.contacts');
+    Route::delete('/admin/contact/{id}/delete', [AdminController::class, 'contact_delete'])->name('admin.contact.delete');
+
+    Route::get('/admin/search', [AdminController::class, 'search'])->name('admin.search');
 
 });
