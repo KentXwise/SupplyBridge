@@ -26,14 +26,14 @@
                 <div class="col-md-4">
                     <div class="form-floating my-3">
                         <input type="text" class="form-control" name="zip" required="" value="{{old('zip', $address ? $address->zip : '')}}">
-                        <label for="zip">Pincode *</label>
+                        <label for="zip">Postal code *</label>
                         @error('zip') <span class="text-danger">{{$message}}</span> @enderror
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-floating mt-3 mb-3">
                         <input type="text" class="form-control" name="state" required="" value="{{old('state', $address ? $address->state : '')}}">
-                        <label for="state">State *</label>
+                        <label for="state">Province *</label>
                         @error('state') <span class="text-danger">{{$message}}</span> @enderror
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                 <div class="col-md-6">
                     <div class="form-floating my-3">
                         <input type="text" class="form-control" name="locality" required="" value="{{old('locality', $address ? $address->locality : '')}}">
-                        <label for="locality">Road Name, Area, Colony *</label>
+                        <label for="locality">Road Name, Area *</label>
                         @error('locality') <span class="text-danger">{{$message}}</span> @enderror
                     </div>
                 </div>
