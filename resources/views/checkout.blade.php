@@ -79,14 +79,14 @@
               <div class="col-md-4">
                 <div class="form-floating my-3">
                   <input type="text" class="form-control" name="zip" require="" value="{{old('zip')}}">
-                  <label for="zip">Pincode *</label>
+                  <label for="zip">Postal Code *</label>
                   @error('zip') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-floating mt-3 mb-3">
                   <input type="text" class="form-control" name="state" required="" value="{{old('state')}}">
-                  <label for="state">State *</label>
+                  <label for="state">Province *</label>
                   @error('state') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
               </div>
@@ -107,7 +107,7 @@
               <div class="col-md-6">
                 <div class="form-floating my-3">
                   <input type="text" class="form-control" name="locality" required="" value="{{Old('locality')}}">
-                  <label for="locality">Road Name, Area, Colony *</label>
+                  <label for="locality">Road Name, Area *</label>
                   @error('locality') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
               </div>
@@ -139,7 +139,7 @@
                         {{$item->name}} x {{$item->qty}}
                       </td>
                       <td align="right">
-                        ${{$item->subtotal()}}
+                        P{{$item->subtotal()}}
                       </td>
                     </tr>
                     @endforeach
@@ -150,7 +150,7 @@
                   <tbody>
                     <tr>
                       <th>SUBTOTAL</th>
-                      <td class="text-right">${{Cart::instance('cart')->subtotal()}}</td>
+                      <td class="text-right">P{{Cart::instance('cart')->subtotal()}}</td>
                     </tr>
                     <tr>
                       <th>SHIPPING</th>
@@ -158,11 +158,11 @@
                     </tr>
                     <tr>
                       <th>VAT</th>
-                      <td class="text-right">${{Cart::instance('cart')->tax()}}</td>
+                      <td class="text-right">P{{Cart::instance('cart')->tax()}}</td>
                     </tr>
                     <tr>
                        <th>TOTAL</th>
-                      <td class="text-right">${{Cart::instance('cart')->total()}}</td>
+                      <td class="text-right">P{{Cart::instance('cart')->total()}}</td>
                     </tr>
                   </tbody>
                 </table>

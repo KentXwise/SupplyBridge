@@ -272,12 +272,12 @@
             </a>
 
             <div class="logo">
-                <a href="index.html">
+                <a href="{{route('home.index')}}">
                     <img src="{{asset('assets/images/adminlogo.png')}}" alt="Uomo" class="logo__image d-block" />
                 </a>
             </div>
 
-            <a href="#" class="header-tools__item header-tools__cart js-open-aside" data-aside="cartDrawer">
+            <a href="{{route('cart.index')}}" class="header-tools__item header-tools__cart js-open-aside" data-aside="cartDrawer">
                 <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <use href="#icon_cart" />
                 </svg>
@@ -311,7 +311,7 @@
                 <div class="overflow-hidden">
                     <ul class="navigation__list list-unstyled position-relative">
                         <li class="navigation__item">
-                            <a href="index.html" class="navigation__link">Home</a>
+                            <a href="{{route('home.index')}}" class="navigation__link">Home</a>
                         </li>
                         <li class="navigation__item">
                             <a href="{{route('shop.index')}}" class="navigation__link">Shop</a>
@@ -323,13 +323,14 @@
                             <a href="{{route('home.about')}}" class="navigation__link">About</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="contact.html" class="navigation__link">Contact</a>
+                            <a href="{{route('home.contact')}}" class="navigation__link">Contact</a>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <div class="border-top mt-auto pb-2">
+                <a href="{{route('user.index')}}">
                 <div class="customer-links container mt-4 mb-2 pb-1">
                     <svg class="d-inline-block align-middle" width="20" height="20" viewBox="0 0 20 20" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -338,7 +339,7 @@
                     <span class="d-inline-block ms-2 text-uppercase align-middle fw-medium">My Account</span>
                 </div>
 
-
+                </a>
 
                 <ul class="container social-links list-unstyled d-flex flex-wrap mb-0">
                     <li>
@@ -579,7 +580,7 @@
                     <h6 class="sub-menu__title text-uppercase">Help</h6>
                     <ul class="sub-menu__list list-unstyled">
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Customer Service</a></li>
-                        <li class="sub-menu__item"><a href="account_dashboard.html" class="menu-link menu-link_us-s">My Account</a>
+                        <li class="sub-menu__item"><a href="{{route('user.index')}}" class="menu-link menu-link_us-s">My Account</a>
                         </li>
                         <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Find a Store</a>
                         </li>
@@ -616,7 +617,7 @@
     <footer class="footer-mobile container w-100 px-5 d-md-none bg-body">
         <div class="row text-center">
             <div class="col-4">
-                <a href="index.html" class="footer-mobile__link d-flex flex-column align-items-center">
+                <a href="{{route('home.index')}}" class="footer-mobile__link d-flex flex-column align-items-center">
                     <svg class="d-block" width="18" height="18" viewBox="0 0 18 18" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <use href="#icon_home" />
@@ -626,17 +627,17 @@
             </div>
 
             <div class="col-4">
-                <a href="index.html" class="footer-mobile__link d-flex flex-column align-items-center">
+                <a href="{{route('shop.index')}}" class="footer-mobile__link d-flex flex-column align-items-center">
                     <svg class="d-block" width="18" height="18" viewBox="0 0 18 18" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_hanger" />
+                        <use href="#icon_cart" />
                     </svg>
                     <span>Shop</span>
                 </a>
             </div>
 
             <div class="col-4">
-                <a href="index.html" class="footer-mobile__link d-flex flex-column align-items-center">
+                <a href="{{route('wishlist.index')}}" class="footer-mobile__link d-flex flex-column align-items-center">
                     <div class="position-relative">
                         <svg class="d-block" width="18" height="18" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">

@@ -55,13 +55,12 @@
                   <div class="shopping-cart__product-item__detail">
                     <h4>{{$item->name}}</h4>
                     <ul class="shopping-cart__product-item__options">
-                      <li>Color: Yellow</li>
-                      <li>Size: L</li>
+
                     </ul>
                   </div>
                 </td>
                 <td>
-                  <span class="shopping-cart__product-price">${{$item->price}}</span>
+                  <span class="shopping-cart__product-price">P{{$item->price}}</span>
                 </td>
                 <td>
                   <div class="qty-control position-relative">
@@ -79,7 +78,7 @@
                   </div>
                 </td>
                 <td>
-                  <span class="shopping-cart__subtotal">${{$item->subtotal}}</span>
+                  <span class="shopping-cart__subtotal">P{{$item->subtotal}}</span>
                 </td>
                 <td>
                   <form method="POST" action="{{route('cart.item.remove',['rowId'=>$item->rowId])}}">
@@ -114,7 +113,7 @@
                 <tbody>
                   <tr>
                     <th>Subtotal</th>
-                    <td>${{Cart::instance('cart')->subtotal()}}</td>
+                    <td>P{{Cart::instance('cart')->subtotal()}}</td>
                   </tr>
                   <tr>
                     <th>Shipping</th>
@@ -122,11 +121,11 @@
                   </tr>
                   <tr>
                     <th>VAT</th>
-                    <td>${{Cart::instance('cart')->tax()}}</td>
+                    <td>P{{Cart::instance('cart')->tax()}}</td>
                   </tr>
                   <tr>
                     <th>Total</th>
-                    <td>${{Cart::instance('cart')->total()}}</td>
+                    <td>P{{Cart::instance('cart')->total()}}</td>
                   </tr>
                 </tbody>
               </table>
