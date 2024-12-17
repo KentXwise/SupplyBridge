@@ -48,12 +48,16 @@
               <div class="accordion-body px-0 pb-0 pt-3 category-list">
                 <ul class="list list-inline mb-0">
                   @foreach ($categories as $category)
+                  <li class="list-item">  
                   <span class="menu link py-1">
-                    <input type="checkbox" class="chk-category" name="categories" value="{{$category->id}}"
+                    <input type="checkbox" class="chk-category" name="categories" value="{{$category->id}}">
                       @if (in_array($category->id,explode(',',$f_categories))) checked @endif
-                    />
                     {{$category->name}}
                   </span>
+                  <span class="text-right float-end">
+                      {{$category->products->count()}}
+                    </span>
+                  </li>
                   @endforeach
                 </ul>
               </div>
